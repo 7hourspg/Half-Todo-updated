@@ -70,7 +70,7 @@ const AddTask = () => {
                 return item;
               }}
             />
-            <Calender/>
+            {/* <Calender/> */}
           </TouchableOpacity>
         </TouchableOpacity>
       ) : (

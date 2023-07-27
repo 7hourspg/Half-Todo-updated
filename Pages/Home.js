@@ -5,9 +5,9 @@ import {ThemeContext} from "../Context/ThemeContext";
 import Loading from "../LoadingScreen/Loading";
 
 const Home = () => {
-  const {isLoading} = useContext(ThemeContext);
-  // console.log(isLoading);
-  return <>{isLoading ? <Loading /> : <Drawer />}</>;
+   const {isLoading} = useContext(ThemeContext);
+
+   return <>{isLoading ? <Loading /> : <Drawer />}</>;
 };
 
 export default Home;
