@@ -8,7 +8,7 @@ import {ThemeContext} from "../Context/ThemeContext";
 const {width, height} = Dimensions.get("screen");
 
 export default function Loading() {
-  //  const {isLoading} = useContext(ThemeContext);
+   const {isLoading} = useContext(ThemeContext);
 
   //  console.log(isLoading);
 
