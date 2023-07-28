@@ -40,7 +40,7 @@ const AddTask = () => {
    console.log(showTextInput);
 
    return (
-      <View style={{flex: 1, backgroundColor: "red", height: 1000}}>
+      <View style={{position: "absolute", bottom: 0, right: 0}}>
          {showTextInput ? (
             // <TouchableOpacity
             //   activeOpacity={1}
@@ -87,7 +87,7 @@ const AddTask = () => {
                   right: 30,
                   backgroundColor: "green",
                   paddingVertical: 20,
-                  paddingHorizontal: 20,
+                  paddingHorizontal: 22,
                   borderRadius: 50,
                }}
                onPress={() => setShowTextInput(true)}
@@ -109,11 +109,11 @@ const style = StyleSheet.create({
       flex: 1,
       width: "100%",
       padding: 36,
-      backgroundColor: "white",
+      backgroundColor: "red",
       // zIndex: 1999,
-      position: "absolute",
-      alignItems: "center",
-      justifyContent: "center",
+      // position: "absolute",
+      // alignItems: "center",
+      // justifyContent: "center",
       // marginTop:100,
 
       // bottom: height/2-50,

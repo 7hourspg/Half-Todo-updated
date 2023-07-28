@@ -83,10 +83,10 @@ const style = StyleSheet.create({
       // justifyContent: "space-between",
       alignItems: "center",
       minHeight: height,
-      // backgroundColor: "black",
+      // backgroundColor: "white",
       position: "relative",
       gap: 10,
-      // opacity:.5
+
       // backgroundColor:"red"
    },
 });

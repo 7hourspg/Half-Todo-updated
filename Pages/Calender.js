@@ -7,6 +7,7 @@ import {
    WeekCalendar,
    AgendaList,
 } from "react-native-calendars";
+import AddTask from "../Components/AddTask/AddTask";
 
 const Calender = () => {
    const [selectedDay, setSelectedDay] = useState();
@@ -83,6 +84,7 @@ const Calender = () => {
             //    }}
          />
          {/* <Text style={{color: "red"}}>Hello</Text> */}
+         <AddTask/>
       </View>
    );
 };

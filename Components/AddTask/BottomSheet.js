@@ -9,11 +9,12 @@ import Animated, {
    runOnJS,
    useAnimatedStyle,
    useSharedValue,
+   withSpring,
    withTiming,
 } from "react-native-reanimated";
 
-const BottomSheet = ({height, setShowTextInput}) => {
-   const {height: SCREEN_HEIGHT, width} = Dimensions.get("screen");
+const BottomSheet = ({setShowTextInput}) => {
+   const {height: SCREEN_HEIGHT, width} = Dimensions.get("window");
 
    const shouldVisible = (arg) => {
       setTimeout(() => {
@@ -42,7 +43,7 @@ const BottomSheet = ({height, setShowTextInput}) => {
 
             runOnJS(shouldVisible)(false);
          } else {
-            translateY.value = withTiming(-SCREEN_HEIGHT + 160);
+            translateY.value = withSpring(-SCREEN_HEIGHT + 160);
          }
       });
 
@@ -57,14 +58,14 @@ const BottomSheet = ({height, setShowTextInput}) => {
    });
 
    useEffect(() => {
-      translateY.value = withTiming(-SCREEN_HEIGHT + 160);
+      translateY.value = withSpring(-SCREEN_HEIGHT + 160);
    }, []);
 
    return (
       <GestureHandlerRootView style={{flex: 1, width: width}}>
          <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.container, bottomSheetStyle]}>
-               <Text>BottomSheet</Text>
+               <View style={styles.line} />
             </Animated.View>
          </GestureDetector>
       </GestureHandlerRootView>
@@ -76,12 +77,19 @@ const {height, width} = Dimensions.get("screen");
 const styles = StyleSheet.create({
    container: {
       height: height,
-      backgroundColor: "grey",
+      backgroundColor: "#3F2E3E",
       width: width,
       position: "absolute",
       top: 0,
       borderRadius: 20,
       alignItems: "center",
+   },
+   line: {
+      width: 100,
+      height: 5,
+      backgroundColor: "white",
+      borderRadius: 10,
+      marginTop: 10,
    },
 });
 
