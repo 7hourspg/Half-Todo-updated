@@ -7,7 +7,9 @@ import {
    WeekCalendar,
    AgendaList,
 } from "react-native-calendars";
-import AddTask from "../Components/AddTask/AddTask";
+// import AddTask from "../Components/AddTask/AddTask";
+
+// Require cycle: Pages\Calender.js -> Components\AddTask\AddTask.js -> Pages\Calender.js Error because of this line 😒
 
 const Calender = () => {
    const [selectedDay, setSelectedDay] = useState();
@@ -84,7 +86,7 @@ const Calender = () => {
             //    }}
          />
          {/* <Text style={{color: "red"}}>Hello</Text> */}
-         <AddTask/>
+         {/* <AddTask/> */}
       </View>
    );
 };
