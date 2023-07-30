@@ -20,7 +20,7 @@ export default function MyApp({children}) {
 
                getData();
           } catch (e) {
-               console.log(e, "ERROR");
+               // console.log(e, "ERROR");
           }
      };
      const getScenery = (Data) => {
@@ -41,7 +41,7 @@ export default function MyApp({children}) {
                     setIsLoading(false);
                }, 0);
           } catch (e) {
-               console.log(e);
+               // console.log(e);
           }
      };
 

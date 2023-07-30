@@ -15,7 +15,7 @@ const TaskAllRoute = ({ navigation, backgroundColor }) => {
   const isFocused = useIsFocused();
   // console.log(backgroundColor);
   // console.log(state);
-  console.log(isFocused)
+  // console.log(isFocused)
   return (
     <View style={styles.ctr}>
       <ScrollView

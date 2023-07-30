@@ -34,7 +34,7 @@ const All = () => {
    ];
 
    const [tasks, setTasks] = useState(numberArray);
-   console.log(tasks);
+   // console.log(tasks);
 
    const onDismiss = useCallback((id) => {
       setTasks((tasks) => tasks?.filter((item) => item.id !== id));
@@ -76,7 +76,7 @@ const All = () => {
 };
 
 const {height} = Dimensions.get("window");
-console.log(height);
+// console.log(height);
 const style = StyleSheet.create({
    container: {
       // flex: 1,

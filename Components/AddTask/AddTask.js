@@ -37,7 +37,7 @@ const AddTask = () => {
 
    const {height, width} = Dimensions.get("screen");
 
-   console.log(showTextInput);
+   // console.log(showTextInput);
 
    return (
       <View style={{position: "absolute", bottom: 0, right: 0}}>

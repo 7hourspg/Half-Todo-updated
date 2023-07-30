@@ -16,7 +16,7 @@ import AddTask from "./AddTask/AddTask";
 
 export default function App({navigation}) {
   const {theme, isLoading} = React.useContext(ThemeContext);
-  console.log(theme);
+  // console.log(theme);
   const Tab = createBottomTabNavigator();
   return (
     <View style={{flex: 1}}>
