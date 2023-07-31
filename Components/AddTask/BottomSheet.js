@@ -1,5 +1,12 @@
-import {View, Text, StyleSheet, Dimensions} from "react-native";
-import React, {useEffect} from "react";
+import {
+   View,
+   Text,
+   StyleSheet,
+   Dimensions,
+   TextInput,
+   Keyboard,
+} from "react-native";
+import React, {useEffect, useState} from "react";
 import {
    Gesture,
    GestureDetector,
@@ -12,9 +19,12 @@ import Animated, {
    withSpring,
    withTiming,
 } from "react-native-reanimated";
+import SelectDropdown from "react-native-select-dropdown";
+import BottomSheetInnerContainer from "./BottomSheetInnerContainer";
 
 const BottomSheet = ({setShowTextInput}) => {
    const {height: SCREEN_HEIGHT, width} = Dimensions.get("window");
+   // const [keyboardStatus, setKeyboardStatus] = useState("");
 
    const shouldVisible = (arg) => {
       setTimeout(() => {
@@ -35,10 +45,10 @@ const BottomSheet = ({setShowTextInput}) => {
       .onUpdate((event) => {
          translateY.value = event.translationY + context.value.y;
 
-         translateY.value = Math.max(translateY.value, -SCREEN_HEIGHT + 160);
+         translateY.value = Math.max(translateY.value, -SCREEN_HEIGHT + 360);
       })
       .onEnd(() => {
-         if (translateY.value > -SCREEN_HEIGHT / 1.5) {
+         if (translateY.value > -SCREEN_HEIGHT / 1) {
             translateY.value = withTiming(0);
 
             runOnJS(shouldVisible)(false);
@@ -58,7 +68,7 @@ const BottomSheet = ({setShowTextInput}) => {
    });
 
    useEffect(() => {
-      translateY.value = withSpring(-SCREEN_HEIGHT + 160);
+      translateY.value = withSpring(-SCREEN_HEIGHT + 560);
    }, []);
 
    return (
@@ -66,6 +76,7 @@ const BottomSheet = ({setShowTextInput}) => {
          <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.container, bottomSheetStyle]}>
                <View style={styles.line} />
+               <BottomSheetInnerContainer />
             </Animated.View>
          </GestureDetector>
       </GestureHandlerRootView>
@@ -77,7 +88,7 @@ const {height, width} = Dimensions.get("screen");
 const styles = StyleSheet.create({
    container: {
       height: height,
-      backgroundColor: "#3F2E3E",
+      backgroundColor: "#160040",
       width: width,
       position: "absolute",
       top: 0,
@@ -90,6 +101,10 @@ const styles = StyleSheet.create({
       backgroundColor: "white",
       borderRadius: 10,
       marginTop: 10,
+   },
+
+   innerContainer: {
+      marginTop: 20,
    },
 });
 

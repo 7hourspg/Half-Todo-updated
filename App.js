@@ -10,15 +10,16 @@ import MyApp from './Context/ThemeContext';
 const index = () => {
   return (
     <MyApp>
-      <StatusBar
+      {/* <StatusBar
         translucent={true}
-        barStyle="light-content" //light-content
+        barStyle="dark-content" //light-content
         backgroundColor={'black'}
         
-      />
+      /> */}
+        <StatusBar style="auto" />
       <View style={styles.container}>
         <NavigationContainer>
-          <TopMargin />
+          {/* <TopMargin /> */}
 
           <Home />
         </NavigationContainer>

@@ -8,7 +8,7 @@ import FontAw5 from 'react-native-vector-icons/FontAwesome5';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ant from 'react-native-vector-icons/AntDesign';
 import Ion from 'react-native-vector-icons/Ionicons';
-// import CustomDrawer from '../Drawer/CustomDrawer';
+import CustomDrawer from '../Drawer/CustomDrawer';
 import PureColor from '../Theme/PureColor';
 import { ThemeContext } from '../Context/ThemeContext';
 import Hola from '../Pages/Hola';
@@ -30,7 +30,7 @@ const Drawer = () => {
               color:"white"||`${theme?.TextColor}`
             },
           }}
-          // drawerContent={(props) => <CustomDrawer {...props} />}
+          drawerContent={(props) => <CustomDrawer {...props} />}
 
           // Comment the above line because we are not using custom drawer for some reason
 

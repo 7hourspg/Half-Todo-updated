@@ -83,7 +83,7 @@ const style = StyleSheet.create({
       // justifyContent: "space-between",
       alignItems: "center",
       minHeight: height,
-      // backgroundColor: "white",
+      backgroundColor: "#16213E",
       position: "relative",
       gap: 10,
 
