@@ -58,7 +58,7 @@ export default function App({navigation}) {
                   >
                     <EvilIcon
                       name="navicon"
-                      size={40}
+                      size={45}
                       // color={"gray"}
                       color={theme?.InActiveColor || "red"}
                       style={{
@@ -67,11 +67,14 @@ export default function App({navigation}) {
                         // backgroundColor:"red",
                         // position:"absolute",
                         // width:80,
-                        // height:100,
+                        height:50,
                         // top:-10,
                         // right:0,
                         // left:45,
                         // justifyContent:"center"
+                        paddingVertical: 10,
+                        paddingBottom: 10,
+                        marginTop: 10,
                       }}
                     />
                   </View>
@@ -80,6 +83,7 @@ export default function App({navigation}) {
             },
             // tabBarLabelStyle: {fontSize: 13, color: theme?.TextColor},
             // tabBarActiveTintColor:"red",
+            tabBarLabel: "",
           }}
         />
         <Tab.Screen

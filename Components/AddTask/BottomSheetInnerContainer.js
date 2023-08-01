@@ -12,6 +12,7 @@ import {
 import React, {useState, useRef} from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import {SelectCountry} from "react-native-element-dropdown";
+import DateTime from "./DateTime";
 
 const BottomSheetInnerContainer = () => {
    const [country, setCountry] = useState("1");
@@ -81,6 +82,7 @@ const BottomSheetInnerContainer = () => {
                showsVerticalScrollIndicator={false}
             />
             {/* <Text>Hello</Text> */}
+            <DateTime />
          </View>
       </View>
    );
@@ -106,6 +108,10 @@ const styles = StyleSheet.create({
       marginVertical: 15,
       position: "relative",
       overflow: "hidden",
+      display: "flex",
+      flexDirection: "row",   
+      justifyContent: "space-between",
+      alignItems: "center",
    },
    dropdown: {
       //   margin: 16,
