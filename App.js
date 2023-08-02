@@ -1,4 +1,4 @@
-import {View, Text, StatusBar, StyleSheet} from "react-native";
+import {View, Text, StatusBar, StyleSheet,SafeAreaView} from "react-native";
 import React, {useContext} from "react";
 import Home from "./Pages/Home";
 import TopMargin from "./Components/TopMargin";
@@ -6,18 +6,18 @@ import {NavigationContainer} from "@react-navigation/native";
 import "react-native-gesture-handler";
 
 import MyApp from "./Context/ThemeContext";
-import {SafeAreaView} from "react-native-safe-area-context";
+// import {SafeAreaView} from "react-native-safe-area-context";
 
 const index = () => {
    return (
       <MyApp>
-         {/* <StatusBar
-            translucent={true}
+         <StatusBar
+            // translucent={true}
             barStyle="light-content" //light-content
             backgroundColor={"black"}
-         /> */}
+         />
 
-         <StatusBar translucent={true} animated={true} />
+         {/* <StatusBar translucent={true} animated={true} /> */}
          <SafeAreaView style={{flex: 1}}>
             <View style={styles.container}>
                <NavigationContainer>

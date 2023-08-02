@@ -21,9 +21,10 @@ const Drawer = () => {
         <Drawer.Navigator
           screenOptions={{
             headerShown: false,
-            drawerType: 'slide',
+            drawerType: 'back',
             drawerActiveBackgroundColor: "green",
             drawerActiveTintColor: 'gray',
+            borderWidth:0,
             drawerItemStyle: {},
             drawerLabelStyle: {
               marginLeft: -20,
