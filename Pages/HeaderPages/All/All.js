@@ -34,7 +34,7 @@ const All = () => {
    ];
 
    const [tasks, setTasks] = useState(numberArray);
-   // console.log(tasks);
+   console.log(tasks);
 
    const onDismiss = useCallback((id) => {
       setTasks((tasks) => tasks?.filter((item) => item.id !== id));
@@ -83,7 +83,7 @@ const style = StyleSheet.create({
       // justifyContent: "space-between",
       alignItems: "center",
       minHeight: height,
-      // backgroundColor: "white",
+      backgroundColor: "#16213E",
       position: "relative",
       gap: 10,
 

@@ -19,7 +19,6 @@ const AddTask = () => {
 
    const [keyboardStatus, setKeyboardStatus] = useState("");
 
-   const countries = ["All", "Work", "Personal", "Wishlist", "Birthday"];
 
    useEffect(() => {
       const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
