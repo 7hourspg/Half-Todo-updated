@@ -2,7 +2,7 @@ import { View, Text, StatusBar } from 'react-native';
 import React,{useContext} from 'react';
 import BottomTab from '../Components/BottomTab'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAw5 from 'react-native-vector-icons/FontAwesome5';
 import Material from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,9 +21,10 @@ const Drawer = () => {
         <Drawer.Navigator
           screenOptions={{
             headerShown: false,
-            drawerType: 'slide',
+            drawerType: 'back',
             drawerActiveBackgroundColor: "green",
             drawerActiveTintColor: 'gray',
+            borderWidth:0,
             drawerItemStyle: {},
             drawerLabelStyle: {
               marginLeft: -20,
@@ -31,6 +32,9 @@ const Drawer = () => {
             },
           }}
           drawerContent={(props) => <CustomDrawer {...props} />}
+
+          // Comment the above line because we are not using custom drawer for some reason
+
           initialRouteName='Home'
         >
           <Drawer.Screen

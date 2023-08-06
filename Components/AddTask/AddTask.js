@@ -19,7 +19,6 @@ const AddTask = () => {
 
    const [keyboardStatus, setKeyboardStatus] = useState("");
 
-   const countries = ["All", "Work", "Personal", "Wishlist", "Birthday"];
 
    useEffect(() => {
       const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
@@ -37,7 +36,7 @@ const AddTask = () => {
 
    const {height, width} = Dimensions.get("screen");
 
-   console.log(showTextInput);
+   // console.log(showTextInput);
 
    return (
       <View style={{position: "absolute", bottom: 0, right: 0}}>

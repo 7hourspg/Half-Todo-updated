@@ -114,7 +114,7 @@ function Toptab() {
                   backfaceVisibility: "visible",
                   elevation: 0,
                   padding: 5,
-                  borderRadius: 20,
+                  borderRadius: 30,
 
                   borderWidth: 1,
                   position: "absolute",
