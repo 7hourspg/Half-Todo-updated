@@ -1,4 +1,4 @@
-import {View, Text, StatusBar, StyleSheet,SafeAreaView} from "react-native";
+import {View, Text, StatusBar, StyleSheet, SafeAreaView} from "react-native";
 import React, {useContext} from "react";
 import Home from "./Pages/Home";
 import TopMargin from "./Components/TopMargin";
@@ -6,6 +6,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import "react-native-gesture-handler";
 
 import MyApp from "./Context/ThemeContext";
+import { ReducerProvider} from "./Components/Reducer/ReducerContext";
 // import {SafeAreaView} from "react-native-safe-area-context";
 
 const index = () => {
@@ -22,8 +23,9 @@ const index = () => {
             <View style={styles.container}>
                <NavigationContainer>
                   {/* <TopMargin /> */}
-
-                  <Home />
+                  <ReducerProvider>
+                     <Home />
+                  </ReducerProvider>
                </NavigationContainer>
             </View>
          </SafeAreaView>

@@ -4,32 +4,34 @@ import ListItem from "../../../Components/ListItem";
 
 import {ScrollView} from "react-native-gesture-handler";
 import AddTask from "../../../Components/AddTask/AddTask";
-import AddTask2 from "../../../Components/AddTask/AddTask2";
+import {ReducerContext} from "../../../Components/Reducer/ReducerContext";
 
 const All = () => {
-   const data = new Array(15).fill("Hello").map((_, i) => "Hello");
+   // const data = new Array(15).fill("Hello").map((_, i) => "Hello");
    // console.log(data);
+   const {state:data, dispatch} = React.useContext(ReducerContext);
+   console.log(data, "DATA FROM REDUCER")
 
    var numberArray = [
       {
          id: 1,
-         name: "rajiv",
+         name: "Hello",
       },
       {
          id: 2,
-         name: "rajiv",
+         name: "Hello",
       },
       {
          id: 3,
-         name: "rajiv",
+         name: "Hello",
       },
       {
          id: 4,
-         name: "rajiv",
+         name: "Hello",
       },
       {
          id: 5,
-         name: "rajiv",
+         name: "Hello",
       },
    ];
 
@@ -58,11 +60,11 @@ const All = () => {
                      // opacity:.5
                   }}
                >
-                  {tasks?.map((item) => (
+                  {data?.map((item) => (
                      <View key={item.id}>
                         <ListItem
                            simultaneousHandlers={scrollRef}
-                           title={item}
+                           taskData={item}
                            onDismiss={onDismiss}
                         />
                      </View>

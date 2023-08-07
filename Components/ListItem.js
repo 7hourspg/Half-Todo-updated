@@ -16,7 +16,8 @@ import Calender from "react-native-vector-icons/AntDesign";
 import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import Start from "react-native-vector-icons/Entypo";
 
-const ListItem = ({title, simultaneousHandlers, onDismiss}) => {
+const ListItem = ({taskData, simultaneousHandlers, onDismiss}) => {
+   console.log(taskData, "DATA FROM LIST ITEM");
    const {width: SCREEN_WIDTH, height: height} = Dimensions.get("screen");
    // console.log(SCREEN_WIDTH, "WIDTH");
 
@@ -56,17 +57,17 @@ const ListItem = ({title, simultaneousHandlers, onDismiss}) => {
          //   itemHeight.value = withTiming(0);
          //   marginBottom.value = withTiming(0,undefined,(isFinished) => {
          //     if(isFinished&&onDismiss){
-         //       runOnJS(onDismiss)(title.id)
+         //       runOnJS(onDismiss)(taskData.id)
          //     }
          //   });
          // } else {
          //   translateX.value = withTiming(0);
          // }
 
-         if (translateX.value > -80) {
+         if (translateX.value > -50) {
             translateX.value = withTiming(0);
             // console.log("END:",translateX.value);
-         } else if (translateX.value > -200 && translateX.value < -80) {
+         } else if (translateX.value > -200 && translateX.value < -50) {
             translateX.value = withTiming(-110);
             // itemHeight.value = withTiming(0);
          } else {
@@ -74,7 +75,7 @@ const ListItem = ({title, simultaneousHandlers, onDismiss}) => {
             itemHeight.value = withDelay(100, withTiming(0));
             marginBottom.value = withTiming(0, undefined, (isFinished) => {
                if (isFinished && onDismiss) {
-                  runOnJS(onDismiss)(title.id);
+                  runOnJS(onDismiss)(taskData.id);
                }
             });
          }
@@ -113,7 +114,7 @@ const ListItem = ({title, simultaneousHandlers, onDismiss}) => {
             <Animated.View
                style={[styles.container, transAnimation, containerStyle]}
             >
-               <Text>{title.name}</Text>
+               <Text>{taskData.taskTitle}</Text>
             </Animated.View>
          </PanGestureHandler>
          <Animated.View style={[styles.actionContainer, opacityAnimation]}>
