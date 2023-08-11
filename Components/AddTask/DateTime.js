@@ -10,15 +10,22 @@ const DateTime = () => {
    const [isDisplayDate, setShow] = useState(false);
 
    const changeSelectedDate = (event, selectedDate) => {
-      const currentDate = selectedDate || mydate;
-      setDate(currentDate);
-      // console.log(event)
-      setShow(false);
-      const newDate = new Date(currentDate);
-      console.log(
-         newDate.toISOString().split("T")[0].split("-").reverse().join("-")
-      );
-      console.log(newDate.toLocaleTimeString());
+      if (event.type === "dismissed") {
+         setShow(false);
+         return;
+      } else if (event.type === "set") {
+         console.log(event, "event");
+         const currentDate = selectedDate || mydate;
+         // console.log(currentDate, "currentDate");
+         setDate(currentDate);
+         // console.log(event)
+         setShow(false);
+         const newDate = new Date(currentDate);
+         console.log(
+            newDate.toISOString().split("T")[0].split("-").reverse().join("-")
+         );
+         console.log(newDate.toLocaleTimeString());
+      }
    };
    const showMode = (currentMode) => {
       setShow(true);
@@ -31,6 +38,7 @@ const DateTime = () => {
       showMode("time");
       Keyboard.dismiss();
    };
+   // console.log(mydate,"mydate")
    return (
       <View style={styles.container}>
          <Calender
@@ -59,11 +67,12 @@ const DateTime = () => {
                //    setDate(currentDate);
                //    setShow(false);
                // }}
-               minimumDate={new Date()}
+               // minimumDate={new Date()}
                positiveButton={{label: "OK", textColor: "green"}}
                negativeButton={{label: "Cancel", textColor: "red"}}
                style={{backgroundColor: "black"}}
                themeVariant="dark"
+               onTouchCancel={() => setShow(false)}
             />
          )}
       </View>

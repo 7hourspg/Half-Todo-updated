@@ -1,5 +1,5 @@
 import {View, Text, Button, StyleSheet, Dimensions} from "react-native";
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useRef, useState, useEffect} from "react";
 import ListItem from "../../../Components/ListItem";
 
 import {ScrollView} from "react-native-gesture-handler";
@@ -9,8 +9,10 @@ import {ReducerContext} from "../../../Components/Reducer/ReducerContext";
 const All = () => {
    // const data = new Array(15).fill("Hello").map((_, i) => "Hello");
    // console.log(data);
-   const {state:data, dispatch} = React.useContext(ReducerContext);
-   console.log(data, "DATA FROM REDUCER")
+   const {data, dispatch} = React.useContext(ReducerContext);
+   // console.log(data, "DATA FROM REDUCER");
+   const [arr, setArr] = useState(data);
+   // console.log(arr, "ARR");
 
    var numberArray = [
       {
@@ -35,7 +37,9 @@ const All = () => {
       },
    ];
 
-   const [tasks, setTasks] = useState(numberArray);
+   
+
+   const [tasks, setTasks] = useState(data);
    console.log(tasks);
 
    const onDismiss = useCallback((id) => {
@@ -43,6 +47,10 @@ const All = () => {
    }, []);
 
    const scrollRef = useRef(null);
+
+   useEffect(() => {
+      setTasks(data);
+   }, [data]);
 
    return (
       <>
@@ -60,7 +68,7 @@ const All = () => {
                      // opacity:.5
                   }}
                >
-                  {data?.map((item) => (
+                  {tasks?.map((item) => (
                      <View key={item.id}>
                         <ListItem
                            simultaneousHandlers={scrollRef}

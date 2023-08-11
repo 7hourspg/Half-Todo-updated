@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import {
    View,
    Text,
@@ -9,14 +10,32 @@ import {
    Modal,
    FlatList,
 } from "react-native";
-import React, {useState, useRef} from "react";
-import SelectDropdown from "react-native-select-dropdown";
-import {SelectCountry} from "react-native-element-dropdown";
+import React, {useState, useContext} from "react";
+// import SelectDropdown from "react-native-select-dropdown";
+import {SelectCountry as SelectDropdown} from "react-native-element-dropdown";
 import DateTime from "./DateTime";
+import Icon from "react-native-vector-icons/Ionicons";
+import {TouchableRipple} from "react-native-paper";
+import {ReducerContext} from "../Reducer/ReducerContext";
+import {v4 as uuidv4} from "uuid";
 
 const BottomSheetInnerContainer = () => {
+   const {data, setData} = useContext(ReducerContext);
+   const [taskTitle, setTaskTitle] = useState("");
+   const [taskCategory, setTaskCategory] = useState("");
+   const [taskDate, setTaskDate] = useState(null);
+   const [taskTime, setTaskTime] = useState(null);
+   // const [isTaskCompleted, setIsTaskCompleted] = useState(false);
    const [country, setCountry] = useState("1");
-   const local_data = [
+
+   // id: 1,
+   //    taskTitle: "Hello",
+   //    taskCategory: "Work",
+   //    taskDate: "2021-05-25",
+   //    taskTime: "12:00",
+   //    isTaskCompleted: false,
+
+   const task_Type = [
       {
          value: "1",
          lable: "No Category",
@@ -39,6 +58,29 @@ const BottomSheetInnerContainer = () => {
       },
    ];
 
+   const submitTask = () => {
+      if (!taskTitle) {
+         alert("Please enter task 😊");
+         return;
+      } else {
+         setData([
+            ...data,
+            {
+               taskTitle,
+               taskCategory,
+               taskDate,
+               taskTime,
+               isTaskCompleted:false,
+               id: uuidv4(),
+            },
+         ]);
+      }
+   };
+
+   // console.log(uuidv4(), "UUID");
+
+   // console.log(data, "DATA FROM REDUCER")
+
    return (
       <View style={styles.container}>
          <TextInput
@@ -48,9 +90,10 @@ const BottomSheetInnerContainer = () => {
             autoFocus={true}
             //   onLayout={() => inputRef.current.focus()}
             //   onKeyPress={() => {console.log("first")}}
+            onChangeText={(text) => setTaskTitle(text)}
          />
          <View style={styles.innerContainer}>
-            <SelectCountry
+            <SelectDropdown
                style={styles.dropdown}
                selectedTextStyle={styles.selectedTextStyle}
                placeholderStyle={styles.placeholderStyle}
@@ -60,14 +103,16 @@ const BottomSheetInnerContainer = () => {
                maxHeight={200}
                minHeight={220}
                value={country}
-               data={local_data}
+               data={task_Type}
                valueField="value"
                labelField="lable"
                // imageField="image"
                placeholder="Select country"
                searchPlaceholder="Search..."
                onChange={(e) => {
-                  setCountry(e.value);
+                  // setTaskCategory(e.lable);
+                  // console.log({label: e.lable, value: e.value});
+                  setTaskCategory(e.lable);
                }}
                onFocus={() => Keyboard.dismiss()}
                activeColor={"#9BE8D8"}
@@ -84,6 +129,14 @@ const BottomSheetInnerContainer = () => {
             {/* <Text>Hello</Text> */}
             <DateTime />
          </View>
+         <TouchableOpacity
+            onPress={() => {
+               submitTask();
+            }}
+            style={styles.submitContainer}
+         >
+            <Icon name="checkmark-done-circle-sharp" size={35} color="white" />
+         </TouchableOpacity>
       </View>
    );
 };
@@ -105,11 +158,11 @@ const styles = StyleSheet.create({
       //  fontWeight: "bold",
    },
    innerContainer: {
-      marginVertical: 15,
+      // marginVertical: 10,
       position: "relative",
       overflow: "hidden",
       display: "flex",
-      flexDirection: "row",   
+      flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
    },
@@ -149,6 +202,14 @@ const styles = StyleSheet.create({
    inputSearchStyle: {
       height: 40,
       fontSize: 16,
+   },
+   submitContainer: {
+      backgroundColor: "green",
+      alignSelf: "center",
+      marginBottom: 20,
+      paddingVertical: 5,
+      paddingHorizontal: 15,
+      borderRadius: 20,
    },
 });
 

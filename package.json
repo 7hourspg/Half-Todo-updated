@@ -26,6 +26,7 @@
     "react-native-calendars": "^1.1300.0",
     "react-native-element-dropdown": "^2.9.0",
     "react-native-gesture-handler": "~2.12.0",
+    "react-native-get-random-values": "^1.9.0",
     "react-native-pager-view": "6.2.0",
     "react-native-paper": "^5.9.1",
     "react-native-reanimated": "~3.3.0",
@@ -33,7 +34,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-select-dropdown": "^3.3.4",
     "react-native-tab-view": "^3.5.2",
-    "react-native-vector-icons": "^10.0.0"
+    "react-native-vector-icons": "^10.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

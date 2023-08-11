@@ -17,7 +17,7 @@ import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import Start from "react-native-vector-icons/Entypo";
 
 const ListItem = ({taskData, simultaneousHandlers, onDismiss}) => {
-   console.log(taskData, "DATA FROM LIST ITEM");
+   // console.log(taskData, "DATA FROM LIST ITEM");
    const {width: SCREEN_WIDTH, height: height} = Dimensions.get("screen");
    // console.log(SCREEN_WIDTH, "WIDTH");
 

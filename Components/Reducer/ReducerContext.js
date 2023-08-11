@@ -1,25 +1,25 @@
-import React, {useEffect, useReducer, createContext} from "react";
+import React, {useEffect, useReducer, createContext,useState} from "react";
 
 import {View, Text, Button} from "react-native";
 import {TextInput} from "react-native-paper";
-const INTIAL_STATE = [
-   {
-      id: 1,
-      taskTitle: "Hello",
-      taskCategory: "Work",
-      taskDate: "2021-05-25",
-      taskTime: "12:00",
-      isTaskCompleted: false,
-   },
-   {
-      id: 2,
-      taskTitle: "Hello World",
-      taskCategory: "Work",
-      taskDate: "2021-05-25",
-      taskTime: "12:00",
-      isTaskCompleted: false,
-   },
-];
+const INTIAL_STATE = [];
+
+// {
+//    id: 1,
+//    taskTitle: "Hello",
+//    taskCategory: "Work",
+//    taskDate: "2021-05-25",
+//    taskTime: "12:00",
+//    isTaskCompleted: false,
+// },
+// {
+//    id: 2,
+//    taskTitle: "Hello World",
+//    taskCategory: "Work",
+//    taskDate: "2021-05-25",
+//    taskTime: "12:00",
+//    isTaskCompleted: false,
+// },
 
 const reducer = (state, action) => {
    switch (action.type) {
@@ -29,6 +29,8 @@ const reducer = (state, action) => {
          return {...state, taskCategory: action.payload};
       case "isTaskCompleted":
          return {...state, inputText: action.payload};
+      case "Add_Task":
+         return [...state, action.payload];
       default:
          return state;
    }
@@ -70,8 +72,12 @@ export const ReducerContext = createContext(INTIAL_STATE);
 
 export const ReducerProvider = ({children}) => {
    const [state, dispatch] = useReducer(reducer, INTIAL_STATE);
+   const [data, setData] = useState([]);
+
+
+   console.log(data, "DATA FROM REDUCER Home");
    return (
-      <ReducerContext.Provider value={{state, dispatch}}>
+      <ReducerContext.Provider value={{state, dispatch,data,setData}}>
          {children}
       </ReducerContext.Provider>
    );
