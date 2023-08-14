@@ -15,18 +15,17 @@ import React, {useState, useContext} from "react";
 import {SelectCountry as SelectDropdown} from "react-native-element-dropdown";
 import DateTime from "./DateTime";
 import Icon from "react-native-vector-icons/Ionicons";
-import {TouchableRipple} from "react-native-paper";
-import {ReducerContext} from "../Reducer/ReducerContext";
+import {DataContext} from "../../Context/DataContext";
 import {v4 as uuidv4} from "uuid";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const BottomSheetInnerContainer = () => {
-   const {data, setData} = useContext(ReducerContext);
+   const {data, setData, getTasksData} = useContext(DataContext);
    const [taskTitle, setTaskTitle] = useState("");
    const [taskCategory, setTaskCategory] = useState("");
    const [taskDate, setTaskDate] = useState(null);
-   const [taskTime, setTaskTime] = useState(null);
-   // const [isTaskCompleted, setIsTaskCompleted] = useState(false);
-   const [country, setCountry] = useState("1");
+   // const [taskTime, setTaskTime] = useState(null);
+   const [taskValue, setTaskValue] = useState("1");
 
    // id: 1,
    //    taskTitle: "Hello",
@@ -58,23 +57,50 @@ const BottomSheetInnerContainer = () => {
       },
    ];
 
+   const setTasksData = async (Data) => {
+      console.log(Data, "DATA FROM REDUCER")
+      try {
+         const jsonValue = JSON.stringify([...data, Data]);
+
+         await AsyncStorage.setItem("tasks", jsonValue);
+
+         getTasksData();
+      } catch (e) {
+         // console.log(e, "ERROR");
+      }
+   };
+
    const submitTask = () => {
       if (!taskTitle) {
          alert("Please enter task 😊");
          return;
       } else {
-         setData([
-            ...data,
-            {
-               taskTitle,
-               taskCategory,
-               taskDate,
-               taskTime,
-               isTaskCompleted:false,
-               id: uuidv4(),
-            },
-         ]);
+            setData([
+               ...data,
+               {
+                  taskTitle,
+                  taskCategory,
+                  taskDate,
+                  // taskTime,
+                  isTaskCompleted: false,
+                  id: uuidv4(),
+               },
+            ]);
+
+         setTasksData({
+            taskTitle,
+            taskCategory,
+            taskDate,
+            // taskTime,
+            isTaskCompleted: false,
+            id: uuidv4(),
+         });
       }
+      setTaskTitle("");
+      setTaskCategory("");
+      setTaskDate(null);
+      // setTaskTime(null);
+      setTaskValue("1");
    };
 
    // console.log(uuidv4(), "UUID");
@@ -86,10 +112,9 @@ const BottomSheetInnerContainer = () => {
          <TextInput
             style={styles.input}
             placeholder="Type task here..."
+            value={taskTitle}
             onSubmitEditing={Keyboard.dismiss}
             autoFocus={true}
-            //   onLayout={() => inputRef.current.focus()}
-            //   onKeyPress={() => {console.log("first")}}
             onChangeText={(text) => setTaskTitle(text)}
          />
          <View style={styles.innerContainer}>
@@ -102,17 +127,18 @@ const BottomSheetInnerContainer = () => {
                iconStyle={styles.iconStyle}
                maxHeight={200}
                minHeight={220}
-               value={country}
+               value={taskValue}
                data={task_Type}
                valueField="value"
                labelField="lable"
                // imageField="image"
-               placeholder="Select country"
-               searchPlaceholder="Search..."
+               // placeholder="Select country"
+               // searchPlaceholder="Search..."
                onChange={(e) => {
                   // setTaskCategory(e.lable);
                   // console.log({label: e.lable, value: e.value});
                   setTaskCategory(e.lable);
+                  setTaskValue(e.value);
                }}
                onFocus={() => Keyboard.dismiss()}
                activeColor={"#9BE8D8"}
@@ -127,7 +153,7 @@ const BottomSheetInnerContainer = () => {
                showsVerticalScrollIndicator={false}
             />
             {/* <Text>Hello</Text> */}
-            <DateTime />
+            <DateTime setTaskDate={setTaskDate} />
          </View>
          <TouchableOpacity
             onPress={() => {

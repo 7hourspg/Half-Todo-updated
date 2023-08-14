@@ -4,7 +4,7 @@ import Calender from "react-native-vector-icons/AntDesign";
 import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const DateTime = () => {
+const DateTime = ({setTaskDate}) => {
    const [mydate, setDate] = useState(new Date());
    const [displaymode, setMode] = useState("date");
    const [isDisplayDate, setShow] = useState(false);
@@ -14,7 +14,7 @@ const DateTime = () => {
          setShow(false);
          return;
       } else if (event.type === "set") {
-         console.log(event, "event");
+         // console.log(event, "event");
          const currentDate = selectedDate || mydate;
          // console.log(currentDate, "currentDate");
          setDate(currentDate);
@@ -22,8 +22,12 @@ const DateTime = () => {
          setShow(false);
          const newDate = new Date(currentDate);
          console.log(
-            newDate.toISOString().split("T")[0].split("-").reverse().join("-")
-         );
+            newDate.toISOString().split("T")[0].split("-").join("-")
+         ,"Hello from Date");
+         // console.log(
+         //    newDate.toISOString().split("T")[0].split("-").reverse().join("-")
+         // );
+         setTaskDate([newDate.toISOString().split("T")[0].split("-").join("-"),newDate.toLocaleTimeString()]);
          console.log(newDate.toLocaleTimeString());
       }
    };

@@ -4,56 +4,56 @@ import {View, Text} from "react-native";
 
 export const ThemeContext = createContext(null);
 
-export default function MyApp({children}) {
-     const [isLoading, setIsLoading] = useState(false);
-     const [theme, setTheme] = useState(theme);
+export default function ThemeProvider({children}) {
+   const [isLoading, setIsLoading] = useState(false);
+   const [theme, setTheme] = useState(theme);
 
-     const [Scenery, setScenery] = useState("");
+   const [Scenery, setScenery] = useState("");
 
-     // Setting Color Data in Local Storage
+   // Setting Color Data in Local Storage
 
-     const getColor = async (Data) => {
-          try {
-               const jsonValue = JSON.stringify(Data);
+   const setColorData = async (Data) => {
+      try {
+         const jsonValue = JSON.stringify(Data);
 
-               await AsyncStorage.setItem("theme", jsonValue);
+         await AsyncStorage.setItem("theme", jsonValue);
 
-               getData();
-          } catch (e) {
-               // console.log(e, "ERROR");
-          }
-     };
-     const getScenery = (Data) => {
-          setScenery(Data);
-     };
+         getColorData()
+      } catch (e) {
+         // console.log(e, "ERROR");
+      }
+   };
+   const getScenery = (Data) => {
+      setScenery(Data);
+   };
 
-     // Getting Data From Local Storage
+   // Getting Data From Local Storage
 
-     const getData = async () => {
-          try {
-               setIsLoading(true);
+   const getColorData = async () => {
+      try {
+         setIsLoading(true);
 
-               const jsonValue = await AsyncStorage.getItem("theme");
+         const jsonValue = await AsyncStorage.getItem("theme");
 
-               setTheme(JSON.parse(jsonValue));
+         setTheme(JSON.parse(jsonValue));
 
-               setTimeout(() => {
-                    setIsLoading(false);
-               }, 0);
-          } catch (e) {
-               // console.log(e);
-          }
-     };
+         setTimeout(() => {
+            setIsLoading(false);
+         }, 1000);
+      } catch (e) {
+         // console.log(e);
+      }
+   };
 
-     useEffect(() => {
-          getData();
-     }, []);
+   useEffect(() => {
+      getColorData();
+   }, []);
 
-     return (
-          <ThemeContext.Provider
-               value={{getColor, theme, Scenery, getScenery, isLoading}}
-          >
-               {children}
-          </ThemeContext.Provider>
-     );
+   return (
+      <ThemeContext.Provider
+         value={{setColorData, theme, Scenery, getScenery, isLoading}}
+      >
+         {children}
+      </ThemeContext.Provider>
+   );
 }

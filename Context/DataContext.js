@@ -2,7 +2,7 @@ import React, {useEffect, useReducer, createContext,useState} from "react";
 
 import {View, Text, Button} from "react-native";
 import {TextInput} from "react-native-paper";
-const INTIAL_STATE = [];
+
 
 // {
 //    id: 1,
@@ -68,17 +68,39 @@ const reducer = (state, action) => {
 
 // export default Reducer;
 
-export const ReducerContext = createContext(INTIAL_STATE);
+const INTIAL_STATE = [];
 
-export const ReducerProvider = ({children}) => {
+export const DataContext = createContext(INTIAL_STATE);
+
+export const DataProvider = ({children}) => {
    const [state, dispatch] = useReducer(reducer, INTIAL_STATE);
    const [data, setData] = useState([]);
+
+   const getTasksData = async () => {
+      try {
+         // setIsLoading(true);
+
+         const jsonValue = await AsyncStorage.getItem("tasks");
+
+         setData(JSON.parse(jsonValue));
+
+         setTimeout(() => {
+            setIsLoading(false);
+         }, 1000);
+      } catch (e) {
+         // console.log(e);
+      }
+   };
+
+   useEffect(() => {
+     getTasksData();
+   }, []);
 
 
    console.log(data, "DATA FROM REDUCER Home");
    return (
-      <ReducerContext.Provider value={{state, dispatch,data,setData}}>
+      <DataContext.Provider value={{state, dispatch,data,setData,getTasksData}}>
          {children}
-      </ReducerContext.Provider>
+      </DataContext.Provider>
    );
 };

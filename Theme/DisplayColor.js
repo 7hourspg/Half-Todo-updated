@@ -4,7 +4,7 @@ import ColorData from './Color';
 import { ThemeContext } from '../Context/ThemeContext';
 
 const DisplayColor = () => {
-  const {getColor} = useContext(ThemeContext);
+  const {setColorData} = useContext(ThemeContext);
 
 
   return (
@@ -18,7 +18,7 @@ const DisplayColor = () => {
             <View key={item.id} style={{ flexDirection: 'column',marginHorizontal:10 }}>
               <TouchableOpacity
                 style={[{ backgroundColor: item.Color }, styles.ColorBox]}
-                onPress={()=>getColor(item)}
+                onPress={()=>setColorData(item)}
               ></TouchableOpacity>
             </View>
           );

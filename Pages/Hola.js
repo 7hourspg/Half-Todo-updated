@@ -1,6 +1,6 @@
 import {View, Text, Button} from "react-native";
 import React from "react";
-import {ReducerContext} from "../Components/Reducer/ReducerContext";
+import {ReducerContext} from "../Context/DataContext";
 
 const Hola = () => {
    const {state, dispatch} = React.useContext(ReducerContext);

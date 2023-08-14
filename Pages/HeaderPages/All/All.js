@@ -4,12 +4,14 @@ import ListItem from "../../../Components/ListItem";
 
 import {ScrollView} from "react-native-gesture-handler";
 import AddTask from "../../../Components/AddTask/AddTask";
-import {ReducerContext} from "../../../Components/Reducer/ReducerContext";
+import {DataContext} from "../../../Context/DataContext";
 
 const All = () => {
+   const scrollRef = useRef(null);
+
    // const data = new Array(15).fill("Hello").map((_, i) => "Hello");
    // console.log(data);
-   const {data, dispatch} = React.useContext(ReducerContext);
+   const {data, dispatch} = React.useContext(DataContext);
    // console.log(data, "DATA FROM REDUCER");
    const [arr, setArr] = useState(data);
    // console.log(arr, "ARR");
@@ -40,13 +42,13 @@ const All = () => {
    
 
    const [tasks, setTasks] = useState(data);
-   console.log(tasks);
+   // console.log(tasks);
 
    const onDismiss = useCallback((id) => {
       setTasks((tasks) => tasks?.filter((item) => item.id !== id));
+      // console.log("first", tasks)
    }, []);
 
-   const scrollRef = useRef(null);
 
    useEffect(() => {
       setTasks(data);

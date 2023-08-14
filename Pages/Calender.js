@@ -12,7 +12,7 @@ import {
 // Require cycle: Pages\Calender.js -> Components\AddTask\AddTask.js -> Pages\Calender.js Error because of this line 😒
 
 const Calender = () => {
-   const [selectedDay, setSelectedDay] = useState();
+   const [selectedDay, setSelectedDay] = useState(null);
    const date = new Date();
 
    let day = date.getDate();
@@ -96,5 +96,7 @@ export default Calender;
 const styles = StyleSheet.create({
    calendar: {
       // backgroundColor: 'grey',
+      borderBottomColor: "grey",
+      borderBottomWidth: 1,
    },
 });

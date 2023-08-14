@@ -1,40 +1,77 @@
-import {View, Text, Dimensions} from "react-native";
-import React from "react";
+import {View, Text, Dimensions,StyleSheet} from "react-native";
+import React,{useRef,useCallback,useEffect} from "react";
 import AddTask from "../Components/AddTask/AddTask";
+import { DataContext } from "../Context/DataContext";
+import ListItem from "../Components/ListItem";
+import { ScrollView } from "react-native-gesture-handler";
+
 
 const Work = () => {
-   const {height, width} = Dimensions.get("window");
-   return (
-      <View
-         style={{
-            flex: 1,
-            backgroundColor: "white",
-          //   height,
-            alighItems: "center",
-            justifyContent: "center",
-          //   width,
-         }}
-      >
-         <Text style={{textAlign: "center"}}>
-            Work Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-            perspiciatis quos, architecto modi quae, quidem dolores praesentium
-            tenetur provident possimus consequuntur laudantium cumque. Cumque
-            saepe quo beatae accusamus incidunt a, quam perferendis voluptate
-            sapiente facilis voluptates corporis totam. Est alias id sed
-            incidunt placeat, distinctio aspernatur deleniti similique, natus
-            repudiandae error adipisci voluptas dolores veritatis nulla, totam
-            ea facilis at excepturi fugit rerum ducimus eos! Sit nemo quae quod,
-            tenetur ipsum iste, velit debitis deserunt explicabo possimus
-            mollitia sed. Dicta, ad. Hic at, dolore optio nisi neque illum eius
-            ipsum officia iure laborum amet fuga ullam, mollitia perspiciatis ex
-            error!
-         </Text>
 
-         {/* <View style={{position: "absolute", bottom: 0, right: 0}}> */}
-         <AddTask />
-         {/* </View> */}
-      </View>
+   const {height, width} = Dimensions.get("window");
+   const {data, dispatch} = React.useContext(DataContext);
+   const [tasks, setTasks] = React.useState(data);
+   const scrollRef = useRef(null);
+
+   console.log(data)
+   const onDismiss = useCallback((id) => {
+      setTasks((tasks) => tasks?.filter((item) => item.id !== id));
+      // console.log("first", tasks)
+   }, []);
+
+
+   useEffect(() => {
+      setTasks(data);
+   }, [data]);
+
+   return (
+      <>
+      <ScrollView
+         ref={scrollRef}
+         pagingEnabled={false} //</>style={{backgroundColor:"grey"}}
+      >
+         <View style={style.container}>
+            <View
+               style={{
+                  marginTop: 85,
+                  marginBottom: 65,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  // opacity:.5
+               }}
+            >
+               {tasks?.map((item) => (
+                  <View key={item.id}>
+                     <ListItem
+                        simultaneousHandlers={scrollRef}
+                        taskData={item}
+                        onDismiss={onDismiss}
+                     />
+                  </View>
+               ))}
+            </View>
+         </View>
+      </ScrollView>
+      <AddTask />
+   </>
+
    );
 };
+
+const {height} = Dimensions.get("window");
+// console.log(height);
+const style = StyleSheet.create({
+   container: {
+      // flex: 1,
+      // justifyContent: "space-between",
+      alignItems: "center",
+      minHeight: height,
+      backgroundColor: "#16213E",
+      position: "relative",
+      gap: 10,
+
+      // backgroundColor:"red"
+   },
+});
 
 export default Work;

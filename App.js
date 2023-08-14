@@ -5,13 +5,13 @@ import TopMargin from "./Components/TopMargin";
 import {NavigationContainer} from "@react-navigation/native";
 import "react-native-gesture-handler";
 
-import MyApp from "./Context/ThemeContext";
-import { ReducerProvider} from "./Components/Reducer/ReducerContext";
+import ThemeProvider from "./Context/ThemeContext";
+import { DataProvider} from "./Context/DataContext";
 // import {SafeAreaView} from "react-native-safe-area-context";
 
 const index = () => {
    return (
-      <MyApp>
+      <ThemeProvider>
          <StatusBar
             // translucent={true}
             barStyle="light-content" //light-content
@@ -23,13 +23,13 @@ const index = () => {
             <View style={styles.container}>
                <NavigationContainer>
                   {/* <TopMargin /> */}
-                  <ReducerProvider>
+                  <DataProvider>
                      <Home />
-                  </ReducerProvider>
+                  </DataProvider>
                </NavigationContainer>
             </View>
          </SafeAreaView>
-      </MyApp>
+      </ThemeProvider>
    );
 };
 const styles = StyleSheet.create({
