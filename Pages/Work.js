@@ -10,19 +10,21 @@ const Work = () => {
 
    const {height, width} = Dimensions.get("window");
    const {data, dispatch} = React.useContext(DataContext);
-   const [tasks, setTasks] = React.useState(data);
+   const [tasks, setTasks] = React.useState(null);
    const scrollRef = useRef(null);
 
-   console.log(data)
+   // console.log(data,"DATA FROM WORK")
    // const onDismiss = useCallback((id) => {
    //    setTasks((tasks) => tasks?.filter((item) => item.id !== id));
    //    // console.log("first", tasks)
    // }, []);
 
 
-   // useEffect(() => {
-   //    setTasks(data);
-   // }, [data]);
+   useEffect(() => {
+      setTasks(data);
+      setTasks((tasks) => tasks?.filter((item) => item.taskCategory === "Work"));
+
+   }, [data]);
 
    return (
       <>
@@ -40,7 +42,7 @@ const Work = () => {
                   // opacity:.5
                }}
             >
-               {/* {tasks?.map((item) => (
+               {tasks?.map((item) => (
                   <View key={item.id}>
                      <ListItem
                         simultaneousHandlers={scrollRef}
@@ -48,7 +50,7 @@ const Work = () => {
                         // onDismiss={onDismiss}
                      />
                   </View>
-               ))} */}
+               ))}
             </View>
          </View>
       </ScrollView>
