@@ -1,8 +1,14 @@
-import React, {useEffect, useReducer, createContext,useState} from "react";
+import React, {
+   useEffect,
+   useReducer,
+   createContext,
+   useState,
+   useCallback,
+} from "react";
 
 import {View, Text, Button} from "react-native";
 import {TextInput} from "react-native-paper";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // {
 //    id: 1,
@@ -81,25 +87,92 @@ export const DataProvider = ({children}) => {
          // setIsLoading(true);
 
          const jsonValue = await AsyncStorage.getItem("tasks");
+         // console.log(jsonValue, "JSON VALUE")
 
          setData(JSON.parse(jsonValue));
 
-         setTimeout(() => {
-            setIsLoading(false);
-         }, 1000);
+         // setTimeout(() => {
+         //    setIsLoading(false);
+         // }, 1000);
       } catch (e) {
-         // console.log(e);
+         console.log(e);
+      }
+   };
+
+   const setTasksData = async (Data) => {
+      // console.log(Data, "DATA FROM REDUCER");
+      // console.log(data, "DATA FROM REDUCER");
+      // // console.log(data.push(Data), "DATA FROM REDUCER")
+      // console.log(typeof data, "DATA FROM REDUCER");
+      console.log(Data, "DATA FROM SetTasksData")
+      try {
+         if (data === null) {
+            await AsyncStorage.setItem("tasks", JSON.stringify([Data]));
+            // console.log("Null")
+            getTasksData();
+         } else {
+            const jsonValue = JSON.stringify([...data,Data]);
+            // console.log(jsonValue,"JSON VALUE")
+            await AsyncStorage.setItem("tasks", jsonValue);
+
+            getTasksData();
+            // console.log("Object")
+         }
+      } catch (e) {
+         console.log(e, "ERROR");
       }
    };
 
    useEffect(() => {
-     getTasksData();
+      getTasksData();
    }, []);
 
+   // const onDismiss = useCallback((id) => {
+   // //  const fetchedData=  getTasksData();
 
-   console.log(data, "DATA FROM REDUCER Home");
+   //    // console.log(getTasksData(),"GET TASKS DATA")
+   //    console.log(id, "ID");
+   //    const dismis= data?.filter((item) => item.id !== id)
+   //    // console.log("first", tasks)
+   //    // console.log(tasks, "TASKS");
+   //    console.log(dismis, "DISMISS");
+   //    // console.log(data, "DATA");
+   // }, []);
+
+   const onDismiss = (id) => {
+      console.log(id, "DISMISS");
+      const dismis = data?.filter((item) => item.id !== id);
+      console.log(dismis, "DISMISS");
+      setFilteredData = async () => {
+         try {
+         //   await AsyncStorage.removeItem('tasks')
+           await AsyncStorage.setItem("tasks", JSON.stringify(dismis));
+
+         } catch(e) {
+           console.log(e,"ERROR")
+         }
+       
+         console.log('Done.')
+       }
+       setData(dismis);
+       setFilteredData();
+      // setTasksData(...dismis);
+      getTasksData();
+   };
+
+   // console.log(data, "DATA FROM REDUCER Home");
    return (
-      <DataContext.Provider value={{state, dispatch,data,setData,getTasksData}}>
+      <DataContext.Provider
+         value={{
+            state,
+            dispatch,
+            data,
+            setData,
+            getTasksData,
+            setTasksData,
+            onDismiss,
+         }}
+      >
          {children}
       </DataContext.Provider>
    );

@@ -11,10 +11,11 @@ const All = () => {
 
    // const data = new Array(15).fill("Hello").map((_, i) => "Hello");
    // console.log(data);
-   const {data, dispatch} = React.useContext(DataContext);
+   const {data, dispatch,getTasksData} = React.useContext(DataContext);
    // console.log(data, "DATA FROM REDUCER");
    const [arr, setArr] = useState(data);
    // console.log(arr, "ARR");
+
 
    var numberArray = [
       {
@@ -44,16 +45,29 @@ const All = () => {
    const [tasks, setTasks] = useState(data);
    // console.log(tasks);
 
-   const onDismiss = useCallback((id) => {
-      setTasks((tasks) => tasks?.filter((item) => item.id !== id));
-      // console.log("first", tasks)
-   }, []);
+   // const onDismiss = useCallback((id) => {
+   //    // console.log(id, "ID");
+   //    const dismis= tasks?.filter((item) => item.id !== id)
+   //    // console.log("first", tasks)
+   //    // console.log(tasks, "TASKS");
+   //    console.log(dismis, "DISMISS");
+   // }, []);
 
 
    useEffect(() => {
-      setTasks(data);
+      setTasks(data);   
    }, [data]);
 
+   // clearAll = async () => {
+   //    try {
+   //      await AsyncStorage.clear()
+   //    } catch(e) {
+   //      // clear error
+   //    }
+    
+   //    console.log('Done.')
+   //  }
+// console.log(data,"DATA FROM REDUCERRR")
    return (
       <>
          <ScrollView
@@ -70,12 +84,14 @@ const All = () => {
                      // opacity:.5
                   }}
                >
+                  {/* <Button title="Hello" onPress={()=>getTasksData()} /> */}
                   {tasks?.map((item) => (
-                     <View key={item.id}>
+                     <View key={item?.id}>
                         <ListItem
                            simultaneousHandlers={scrollRef}
                            taskData={item}
-                           onDismiss={onDismiss}
+                           // onDismiss={onDismiss}
+                           // key={item.id}
                         />
                      </View>
                   ))}

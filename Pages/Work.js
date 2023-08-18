@@ -14,15 +14,15 @@ const Work = () => {
    const scrollRef = useRef(null);
 
    console.log(data)
-   const onDismiss = useCallback((id) => {
-      setTasks((tasks) => tasks?.filter((item) => item.id !== id));
-      // console.log("first", tasks)
-   }, []);
+   // const onDismiss = useCallback((id) => {
+   //    setTasks((tasks) => tasks?.filter((item) => item.id !== id));
+   //    // console.log("first", tasks)
+   // }, []);
 
 
-   useEffect(() => {
-      setTasks(data);
-   }, [data]);
+   // useEffect(() => {
+   //    setTasks(data);
+   // }, [data]);
 
    return (
       <>
@@ -40,15 +40,15 @@ const Work = () => {
                   // opacity:.5
                }}
             >
-               {tasks?.map((item) => (
+               {/* {tasks?.map((item) => (
                   <View key={item.id}>
                      <ListItem
                         simultaneousHandlers={scrollRef}
                         taskData={item}
-                        onDismiss={onDismiss}
+                        // onDismiss={onDismiss}
                      />
                   </View>
-               ))}
+               ))} */}
             </View>
          </View>
       </ScrollView>

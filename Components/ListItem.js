@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Dimensions} from "react-native";
-import React from "react";
+import React,{useContext} from "react";
 import {PanGestureHandler} from "react-native-gesture-handler";
 import Animated, {
    runOnJS,
@@ -15,8 +15,11 @@ import Animated, {
 import Calender from "react-native-vector-icons/AntDesign";
 import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import Start from "react-native-vector-icons/Entypo";
+import { DataContext } from "../Context/DataContext";
 
-const ListItem = ({taskData, simultaneousHandlers, onDismiss}) => {
+const ListItem = ({taskData, simultaneousHandlers}) => {
+   console.log(taskData, "DATA FROM LIST ITEM")
+   const {onDismiss} = useContext(DataContext)
    // console.log(taskData, "DATA FROM LIST ITEM");
    const {width: SCREEN_WIDTH, height: height} = Dimensions.get("screen");
    // console.log(SCREEN_WIDTH, "WIDTH");
@@ -64,7 +67,7 @@ const ListItem = ({taskData, simultaneousHandlers, onDismiss}) => {
          //   translateX.value = withTiming(0);
          // }
 
-         if (translateX.value > -50) {
+         if (translateX.value > -110) {
             translateX.value = withTiming(0);
             // console.log("END:",translateX.value);
          } else if (translateX.value > -200 && translateX.value < -50) {
@@ -114,7 +117,7 @@ const ListItem = ({taskData, simultaneousHandlers, onDismiss}) => {
             <Animated.View
                style={[styles.container, transAnimation, containerStyle]}
             >
-               <Text>{taskData.taskTitle}</Text>
+               <Text>{taskData?.taskTitle}</Text>
             </Animated.View>
          </PanGestureHandler>
          <Animated.View style={[styles.actionContainer, opacityAnimation]}>

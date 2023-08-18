@@ -1,14 +1,12 @@
 import "react-native-get-random-values";
 import {
    View,
-   Text,
    Keyboard,
    StyleSheet,
    Dimensions,
    TextInput,
    TouchableOpacity,
-   Modal,
-   FlatList,
+   
 } from "react-native";
 import React, {useState, useContext} from "react";
 // import SelectDropdown from "react-native-select-dropdown";
@@ -20,7 +18,7 @@ import {v4 as uuidv4} from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const BottomSheetInnerContainer = () => {
-   const {data, setData, getTasksData} = useContext(DataContext);
+   const {data, setData, getTasksData,setTasksData} = useContext(DataContext);
    const [taskTitle, setTaskTitle] = useState("");
    const [taskCategory, setTaskCategory] = useState("");
    const [taskDate, setTaskDate] = useState(null);
@@ -57,35 +55,35 @@ const BottomSheetInnerContainer = () => {
       },
    ];
 
-   const setTasksData = async (Data) => {
-      console.log(Data, "DATA FROM REDUCER")
-      try {
-         const jsonValue = JSON.stringify([...data, Data]);
+   // const setTasksData = async (Data) => {
+   //    console.log(Data, "DATA FROM REDUCER")
+   //    try {
+   //       const jsonValue = JSON.stringify([...data, Data]);
 
-         await AsyncStorage.setItem("tasks", jsonValue);
+   //       await AsyncStorage.setItem("tasks", jsonValue);
 
-         getTasksData();
-      } catch (e) {
-         // console.log(e, "ERROR");
-      }
-   };
+   //       getTasksData();
+   //    } catch (e) {
+   //       console.log(e, "ERROR");
+   //    }
+   // };
 
    const submitTask = () => {
       if (!taskTitle) {
          alert("Please enter task 😊");
          return;
       } else {
-            setData([
-               ...data,
-               {
-                  taskTitle,
-                  taskCategory,
-                  taskDate,
-                  // taskTime,
-                  isTaskCompleted: false,
-                  id: uuidv4(),
-               },
-            ]);
+            // setData([
+            //    ...data,
+            //    {
+            //       taskTitle,
+            //       taskCategory,
+            //       taskDate,
+            //       // taskTime,
+            //       isTaskCompleted: false,
+            //       id: uuidv4(),
+            //    },
+            // ]);
 
          setTasksData({
             taskTitle,
@@ -101,6 +99,7 @@ const BottomSheetInnerContainer = () => {
       setTaskDate(null);
       // setTaskTime(null);
       setTaskValue("1");
+      // getTasksData();   
    };
 
    // console.log(uuidv4(), "UUID");
@@ -158,6 +157,7 @@ const BottomSheetInnerContainer = () => {
          <TouchableOpacity
             onPress={() => {
                submitTask();
+               // getTasksData();
             }}
             style={styles.submitContainer}
          >
