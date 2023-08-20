@@ -13,6 +13,8 @@ import {ThemeContext} from "../Context/ThemeContext";
 import All from "../Pages/HeaderPages/All/All";
 import AddTask from "./AddTask/AddTask";
 import Work from "../Pages/Work";
+import Personal from "../Pages/HeaderPages/Personal/Personal"
+// import Personal from './../TaskComponents/Personal';
 
 function FeedScreen({navigation}) {
    const {Scenery, theme} = React.useContext(ThemeContext);
@@ -156,7 +158,7 @@ function Toptab() {
             />
             <Tab.Screen
                name="Profile"
-               component={ProfileScreen}
+               component={Personal}
                options={{tabBarLabel: "Personal"}}
             />
             <Tab.Screen

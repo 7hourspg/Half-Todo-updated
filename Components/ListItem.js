@@ -14,11 +14,12 @@ import Animated, {
 // import
 import Calender from "react-native-vector-icons/AntDesign";
 import Clock from "react-native-vector-icons/MaterialCommunityIcons";
-import Start from "react-native-vector-icons/Entypo";
+import Star from "react-native-vector-icons/Entypo";
+import Notibell from "react-native-vector-icons/Ionicons";
 import { DataContext } from "../Context/DataContext";
 
 const ListItem = ({taskData, simultaneousHandlers}) => {
-   console.log(taskData, "DATA FROM LIST ITEM")
+   // console.log(taskData, "DATA FROM LIST ITEM")
    const {onDismiss} = useContext(DataContext)
    // console.log(taskData, "DATA FROM LIST ITEM");
    const {width: SCREEN_WIDTH, height: height} = Dimensions.get("screen");
@@ -108,6 +109,8 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
       };
    });
 
+   console.log(taskData?.taskDate)
+
    return (
       <View>
          <PanGestureHandler
@@ -117,13 +120,16 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
             <Animated.View
                style={[styles.container, transAnimation, containerStyle]}
             >
-               <Text>{taskData?.taskTitle}</Text>
+               <Text style={{fontSize:17,color:"white"}}>{taskData?.taskTitle}</Text>
+
+               <Text style={{fontSize:13,color:"#F2EAD3",}}>03-08 08:37 pm {taskData.taskDate&& <Notibell name="notifications-circle-sharp" size={20} color="#F2EAD3"  />}</Text>
+
             </Animated.View>
          </PanGestureHandler>
          <Animated.View style={[styles.actionContainer, opacityAnimation]}>
-          <View style={{flex:2.1}}/>
+          <View style={{flex:2.3}}/>
             <View style={{flex:1,flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-               <Start name="star-outlined" size={30} color="white"  />
+               <Star name="star-outlined" size={30} color="white"  />
                <Calender name="calendar" size={30} color="white" />
                <Clock name="clock-outline" size={30} color="white" />
             </View>
@@ -137,19 +143,22 @@ const styles = StyleSheet.create({
       backgroundColor: "green",
       width: 350,
       // height: 70,
-      alignItems: "center",
-      justifyContent: "center",
+//   alignItems: "center",
+      justifyContent: "space-evenly",
       borderRadius: 10,
       zIndex: 1,
       // marginBottom:20
+      fontSize: 20,
+      marginHorizontal: 5,
+      paddingHorizontal: 10,
    },
    actionContainer: {
-      backgroundColor: "red",
+      backgroundColor: "#A8DF8E",
       width: 350,
       height: 70,
       alignItems: "end",
       justifyContent: "space-evenly",
-      borderRadius: 10,
+      borderRadius: 17,
       position: "absolute",
       flexDirection: "row",
    },

@@ -1,12 +1,12 @@
 import {View, Text, Dimensions,StyleSheet} from "react-native";
 import React,{useRef,useCallback,useEffect} from "react";
-import AddTask from "../Components/AddTask/AddTask";
-import { DataContext } from "../Context/DataContext";
-import ListItem from "../Components/ListItem";
+import AddTask from "../../../Components/AddTask/AddTask";
+import { DataContext } from "../../../Context/DataContext";
+import ListItem from "../../../Components/ListItem";
 import { ScrollView } from "react-native-gesture-handler";
 
 
-const Work = () => {
+const Personal = () => {
 
    const {height, width} = Dimensions.get("window");
    const {data, dispatch} = React.useContext(DataContext);
@@ -22,7 +22,7 @@ const Work = () => {
 
    useEffect(() => {
       // setTasks(data);
-      setTasks(data?.filter((item) => item.taskCategory === "Work"));
+      setTasks(data?.filter((item) => item.taskCategory === "Personal"));
     
 // console.log(tasks,"TASKS FROM WORK")
    }, [data]);
@@ -78,4 +78,4 @@ const style = StyleSheet.create({
    },
 });
 
-export default Work;
+export default Personal;
