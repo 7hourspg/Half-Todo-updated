@@ -5,6 +5,7 @@ import ListItem from "../../../Components/ListItem";
 import {ScrollView} from "react-native-gesture-handler";
 import AddTask from "../../../Components/AddTask/AddTask";
 import {DataContext} from "../../../Context/DataContext";
+import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
 
 const All = () => {
    const scrollRef = useRef(null);
@@ -85,16 +86,19 @@ const All = () => {
                   }}
                >
                   {/* <Button title="Hello" onPress={()=>getTasksData()} /> */}
-                  {tasks?.map((item) => (
-                     <View key={item?.id}>
-                        <ListItem
-                           simultaneousHandlers={scrollRef}
-                           taskData={item}
-                           // onDismiss={onDismiss}
-                           // key={item.id}
-                        />
-                     </View>
-                  ))}
+                  {tasks?.length > 0 ? (
+                     tasks?.map((item) => (
+                        <View key={item.id}>
+                           <ListItem
+                              simultaneousHandlers={scrollRef}
+                              taskData={item}
+                              // onDismiss={onDismiss}
+                           />
+                        </View>
+                     ))
+                  ) : (
+                     <NothingToShow />
+                  )}
                </View>
             </View>
          </ScrollView>

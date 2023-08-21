@@ -1,14 +1,12 @@
-import {View, Text, Dimensions,StyleSheet} from "react-native";
-import React,{useRef,useCallback,useEffect} from "react";
-import AddTask from "../Components/AddTask/AddTask";
-import { DataContext } from "../Context/DataContext";
-import ListItem from "../Components/ListItem";
-import { ScrollView } from "react-native-gesture-handler";
-import NothingToShow from "../Components/NothingToShow/NothingToShow";
+import {View, Text, Dimensions, StyleSheet} from "react-native";
+import React, {useRef, useCallback, useEffect} from "react";
+import AddTask from "../../../Components/AddTask/AddTask";
+import {DataContext} from "../../../Context/DataContext";
+import ListItem from "../../../Components/ListItem";
+import {ScrollView} from "react-native-gesture-handler";
+import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
 
-
-const Work = () => {
-
+const Birthday = () => {
    const {height, width} = Dimensions.get("window");
    const {data, dispatch} = React.useContext(DataContext);
    const [tasks, setTasks] = React.useState(null);
@@ -20,32 +18,30 @@ const Work = () => {
    //    // console.log("first", tasks)
    // }, []);
 
-
    useEffect(() => {
       // setTasks(data);
-      setTasks(data?.filter((item) => item.taskCategory === "Work"));
-    
-// console.log(tasks,"TASKS FROM WORK")
+      setTasks(data?.filter((item) => item.taskCategory === "Birthday"));
+
+      // console.log(tasks,"TASKS FROM WORK")
    }, [data]);
-   
 
    return (
       <>
-      <ScrollView
-         ref={scrollRef}
-         pagingEnabled={false} //</>style={{backgroundColor:"grey"}}
-      >
-         <View style={style.container}>
-            <View
-               style={{
-                  marginTop: 85,
-                  marginBottom: 65,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  // opacity:.5
-               }}
-            >
-               {tasks?.length > 0 ? (
+         <ScrollView
+            ref={scrollRef}
+            pagingEnabled={false} //</>style={{backgroundColor:"grey"}}
+         >
+            <View style={style.container}>
+               <View
+                  style={{
+                     marginTop: 85,
+                     marginBottom: 65,
+                     alignItems: "center",
+                     justifyContent: "center",
+                     // opacity:.5
+                  }}
+               >
+                  {tasks?.length > 0 ? (
                      tasks?.map((item) => (
                         <View key={item.id}>
                            <ListItem
@@ -58,12 +54,11 @@ const Work = () => {
                   ) : (
                      <NothingToShow />
                   )}
+               </View>
             </View>
-         </View>
-      </ScrollView>
-      <AddTask />
-   </>
-
+         </ScrollView>
+         <AddTask />
+      </>
    );
 };
 
@@ -83,4 +78,4 @@ const style = StyleSheet.create({
    },
 });
 
-export default Work;
+export default Birthday;

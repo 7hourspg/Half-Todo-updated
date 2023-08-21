@@ -1,13 +1,12 @@
-import {View, Text, Dimensions,StyleSheet} from "react-native";
-import React,{useRef,useCallback,useEffect} from "react";
+import {View, Text, Dimensions, StyleSheet} from "react-native";
+import React, {useRef, useCallback, useEffect} from "react";
 import AddTask from "../../../Components/AddTask/AddTask";
-import { DataContext } from "../../../Context/DataContext";
+import {DataContext} from "../../../Context/DataContext";
 import ListItem from "../../../Components/ListItem";
-import { ScrollView } from "react-native-gesture-handler";
-
+import {ScrollView} from "react-native-gesture-handler";
+import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
 
 const Personal = () => {
-
    const {height, width} = Dimensions.get("window");
    const {data, dispatch} = React.useContext(DataContext);
    const [tasks, setTasks] = React.useState(null);
@@ -19,46 +18,47 @@ const Personal = () => {
    //    // console.log("first", tasks)
    // }, []);
 
-
    useEffect(() => {
       // setTasks(data);
       setTasks(data?.filter((item) => item.taskCategory === "Personal"));
-    
-// console.log(tasks,"TASKS FROM WORK")
+
+      console.log(tasks, "TASKS FROM Personal");
    }, [data]);
-   
 
    return (
       <>
-      <ScrollView
-         ref={scrollRef}
-         pagingEnabled={false} //</>style={{backgroundColor:"grey"}}
-      >
-         <View style={style.container}>
-            <View
-               style={{
-                  marginTop: 85,
-                  marginBottom: 65,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  // opacity:.5
-               }}
-            >
-               {tasks?.map((item) => (
-                  <View key={item.id}>
-                     <ListItem
-                        simultaneousHandlers={scrollRef}
-                        taskData={item}
-                        // onDismiss={onDismiss}
-                     />
-                  </View>
-               ))}
+         <ScrollView
+            ref={scrollRef}
+            pagingEnabled={false} //</>style={{backgroundColor:"grey"}}
+         >
+            <View style={style.container}>
+               <View
+                  style={{
+                     marginTop: 85,
+                     marginBottom: 65,
+                     alignItems: "center",
+                     justifyContent: "center",
+                     // opacity:.5
+                  }}
+               >
+                  {tasks?.length > 0 ? (
+                     tasks?.map((item) => (
+                        <View key={item.id}>
+                           <ListItem
+                              simultaneousHandlers={scrollRef}
+                              taskData={item}
+                              // onDismiss={onDismiss}
+                           />
+                        </View>
+                     ))
+                  ) : (
+                     <NothingToShow />
+                  )}
+               </View>
             </View>
-         </View>
-      </ScrollView>
-      <AddTask />
-   </>
-
+         </ScrollView>
+         <AddTask />
+      </>
    );
 };
 

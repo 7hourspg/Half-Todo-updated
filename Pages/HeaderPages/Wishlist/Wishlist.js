@@ -1,13 +1,13 @@
 import {View, Text, Dimensions,StyleSheet} from "react-native";
 import React,{useRef,useCallback,useEffect} from "react";
-import AddTask from "../Components/AddTask/AddTask";
-import { DataContext } from "../Context/DataContext";
-import ListItem from "../Components/ListItem";
+import AddTask from "../../../Components/AddTask/AddTask";
+import { DataContext } from "../../../Context/DataContext";
+import ListItem from "../../../Components/ListItem";
 import { ScrollView } from "react-native-gesture-handler";
-import NothingToShow from "../Components/NothingToShow/NothingToShow";
+import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
 
 
-const Work = () => {
+const Wishlist = () => {
 
    const {height, width} = Dimensions.get("window");
    const {data, dispatch} = React.useContext(DataContext);
@@ -23,7 +23,7 @@ const Work = () => {
 
    useEffect(() => {
       // setTasks(data);
-      setTasks(data?.filter((item) => item.taskCategory === "Work"));
+      setTasks(data?.filter((item) => item.taskCategory === "Wishlist"));
     
 // console.log(tasks,"TASKS FROM WORK")
    }, [data]);
@@ -45,7 +45,7 @@ const Work = () => {
                   // opacity:.5
                }}
             >
-               {tasks?.length > 0 ? (
+              {tasks?.length > 0 ? (
                      tasks?.map((item) => (
                         <View key={item.id}>
                            <ListItem
@@ -83,4 +83,4 @@ const style = StyleSheet.create({
    },
 });
 
-export default Work;
+export default Wishlist;

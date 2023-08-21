@@ -14,7 +14,8 @@ import All from "../Pages/HeaderPages/All/All";
 import AddTask from "./AddTask/AddTask";
 import Work from "../Pages/Work";
 import Personal from "../Pages/HeaderPages/Personal/Personal"
-// import Personal from './../TaskComponents/Personal';
+import Wishlist from "../Pages/HeaderPages/Wishlist/Wishlist";
+import Birthday from "../Pages/HeaderPages/Birthday/Birthday";
 
 function FeedScreen({navigation}) {
    const {Scenery, theme} = React.useContext(ThemeContext);
@@ -142,7 +143,7 @@ function Toptab() {
             }}
          >
             <Tab.Screen
-               name="Feed"
+               name="HomePage"
                component={All}
                options={{
                   tabBarLabel: "All",
@@ -157,18 +158,18 @@ function Toptab() {
                options={{tabBarLabel: "Work"}}
             />
             <Tab.Screen
-               name="Profile"
+               name="Personal"
                component={Personal}
                options={{tabBarLabel: "Personal"}}
             />
             <Tab.Screen
-               name="Profile2"
-               component={ProfileScreen2}
+               name="Wishlist"
+               component={Wishlist}
                options={{tabBarLabel: "Wishlist"}}
             />
             <Tab.Screen
-               name="Profile3"
-               component={ProfileScreen3}
+               name="Birthday"
+               component={Birthday}
                options={{tabBarLabel: "Birthday"}}
             />
          </Tab.Navigator>
