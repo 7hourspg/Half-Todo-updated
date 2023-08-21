@@ -129,9 +129,9 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
          <Animated.View style={[styles.actionContainer, opacityAnimation]}>
           <View style={{flex:2.3}}/>
             <View style={{flex:1,flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-               <Star name="star-outlined" size={30} color="white"  />
-               <Calender name="calendar" size={30} color="white" />
-               <Clock name="clock-outline" size={30} color="white" />
+               <Star name="star-outlined" size={30} color="black"  />
+               <Calender name="calendar" size={30} color="black" />
+               <Clock name="clock-outline" size={30} color="black" />
             </View>
          </Animated.View>
       </View>
@@ -140,7 +140,7 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
 
 const styles = StyleSheet.create({
    container: {
-      backgroundColor: "green",
+      backgroundColor: "#8B6AFE",
       width: 350,
       // height: 70,
 //   alignItems: "center",
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10,
    },
    actionContainer: {
-      backgroundColor: "#A8DF8E",
+      backgroundColor: "#BEADFA",
       width: 350,
       height: 70,
       alignItems: "end",

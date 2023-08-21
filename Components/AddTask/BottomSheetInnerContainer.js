@@ -140,7 +140,7 @@ const BottomSheetInnerContainer = () => {
                   setTaskValue(e.value);
                }}
                onFocus={() => Keyboard.dismiss()}
-               activeColor={"#9BE8D8"}
+               activeColor={"#BEADFA"}
                autoScrollToDefaultValue={true}
                dropdownPosition="top"
                containerStyle={{
@@ -177,11 +177,12 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       // marginBottom: 50,
       width: width - 50,
-      backgroundColor: "#ECDBBA",
+      backgroundColor: "#BEADFA",
       paddingVertical: 20,
       color: "#160040",
       fontSize: 17,
       //  fontWeight: "bold",
+      
    },
    innerContainer: {
       // marginVertical: 10,
@@ -197,13 +198,14 @@ const styles = StyleSheet.create({
       height: 50,
       //  borderBottomColor: "gray",
       //  borderBottomWidth: 0.5,
-      backgroundColor: "white",
+      backgroundColor: "#BEADFA",
       width: 160,
       // alignSelf:"center",
       borderRadius: 20,
       padding: 10,
       overflow: "hidden",
       paddingBottom: 10,
+      // color: "white",
    },
    imageStyle: {
       width: 24,
@@ -230,7 +232,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
    },
    submitContainer: {
-      backgroundColor: "green",
+      backgroundColor: "#8B6AFE",
       alignSelf: "center",
       marginBottom: 20,
       paddingVertical: 5,

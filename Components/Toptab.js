@@ -113,7 +113,7 @@ function Toptab() {
                },
                // 3B3D3C
                tabBarStyle: {
-                  backgroundColor: "black",
+                  backgroundColor: theme?.BottomTabBg || "white",
                   backfaceVisibility: "visible",
                   elevation: 0,
                   padding: 5,
@@ -121,7 +121,7 @@ function Toptab() {
 
                   borderWidth: 1,
                   position: "absolute",
-                  //  borderColor:theme?.Color,
+                   borderColor:theme?.ActiveColor,
                   margin: 10,
                   // paddingHorizontal:10
                   // marginHorizontal:10

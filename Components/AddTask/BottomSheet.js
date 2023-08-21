@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
    line: {
       width: 100,
       height: 5,
-      backgroundColor: "white",
+      backgroundColor: "#BEADFA",
       borderRadius: 10,
       marginTop: 10,
    },

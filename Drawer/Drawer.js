@@ -22,13 +22,14 @@ const Drawer = () => {
           screenOptions={{
             headerShown: false,
             drawerType: 'back',
-            drawerActiveBackgroundColor: "green",
+            drawerActiveBackgroundColor: "#8B6AFE",
             drawerActiveTintColor: 'gray',
-            borderWidth:0,
+            borderWidth:2,
             drawerItemStyle: {},
             drawerLabelStyle: {
               marginLeft: -20,
               color:"white"||`${theme?.TextColor}`
+              
             },
           }}
           drawerContent={(props) => <CustomDrawer {...props} />}

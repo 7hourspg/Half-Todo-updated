@@ -18,12 +18,47 @@ const ColorData = [
   {
     id: 8,
     Color: "#000000",
-    TabBackgroundColor: "black",
-    BackgroundColor: "#1F1E1E",
+    TabBackgroundColor: "red",
+    BackgroundColor: "#000000",
     TextColor: "white",
     BottomTabBg: "black",
-    ActiveColor: "#2EA268",
+    ActiveColor: "#8B6AFE",
     InActiveColor: "gray",
+    topTab:{
+      backgroundColor:"#000000",
+      borderColor:"#8B6AFE",
+      activeColor:"#8B6AFE",
+    },
+    bottomTab:{
+      backgroundColor:"#000000",
+      borderColor:"#8B6AFE",
+      activeColor:"#8B6AFE"
+    },
+    BottomSheet:{
+      backgroundColor:"#160040",
+      lineColor:"#BEADFA",
+      inputTextColor:"#160040",
+      allComponentColor:"#BEADFA",
+      submitButtonColor:"#8B6AFE",
+    },
+    Drawer:{
+      backgroundColor:"#000000",
+      textColor:"white",
+      activeColor:"#8B6AFE",
+      iconColor:"white",
+    },
+    AddTask:{
+      color:"#8B6AFE",
+      iconColor:"white",
+    },
+    ListItem:{
+      primaryColor:"#8B6AFE",
+      secondaryColor:"#BEADFA",
+      textColor:"white",
+      iconColor:"black",
+    }
+    
   },
 ];
 export default ColorData;
+

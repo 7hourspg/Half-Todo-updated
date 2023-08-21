@@ -81,10 +81,10 @@ const AddTask = () => {
             <TouchableOpacity
                style={{
                   position: "absolute",
-                  backgroundColor: "green",
+                  // backgroundColor: "green",
                   bottom: 120,
                   right: 30,
-                  backgroundColor: "green",
+                  backgroundColor: "#8B6AFE",
                   paddingVertical: 20,
                   paddingHorizontal: 22,
                   borderRadius: 50,

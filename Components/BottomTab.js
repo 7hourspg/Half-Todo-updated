@@ -115,7 +115,7 @@ export default function App({navigation}) {
             tabBarLabelStyle: {fontSize: 13},
             tabBarBadge: new Date().getDate(),
             tabBarBadgeStyle: {
-              backgroundColor: "green",
+              backgroundColor: "#8B6AFE",
             },
           }}
         />

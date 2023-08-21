@@ -6,6 +6,7 @@ import {ScrollView} from "react-native-gesture-handler";
 import AddTask from "../../../Components/AddTask/AddTask";
 import {DataContext} from "../../../Context/DataContext";
 import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
+import { ThemeContext } from "../../../Context/ThemeContext";
 
 const All = () => {
    const scrollRef = useRef(null);
@@ -13,6 +14,8 @@ const All = () => {
    // const data = new Array(15).fill("Hello").map((_, i) => "Hello");
    // console.log(data);
    const {data, dispatch,getTasksData} = React.useContext(DataContext);
+   const {theme} = React.useContext(ThemeContext);
+   console.log(theme, "THEME")
    // console.log(data, "DATA FROM REDUCER");
    const [arr, setArr] = useState(data);
    // console.log(arr, "ARR");
@@ -69,6 +72,21 @@ const All = () => {
    //    console.log('Done.')
    //  }
 // console.log(data,"DATA FROM REDUCERRR")
+
+const style = StyleSheet.create({
+   container: {
+      // flex: 1,
+      // justifyContent: "space-between",
+      alignItems: "center",
+      minHeight: height,
+      backgroundColor: theme?.BackgroundColor,
+      position: "relative",
+      gap: 10,
+
+      // backgroundColor:"red"
+   },
+});
+
    return (
       <>
          <ScrollView
@@ -109,18 +127,19 @@ const All = () => {
 
 const {height} = Dimensions.get("window");
 // console.log(height);
-const style = StyleSheet.create({
-   container: {
-      // flex: 1,
-      // justifyContent: "space-between",
-      alignItems: "center",
-      minHeight: height,
-      backgroundColor: "#16213E",
-      position: "relative",
-      gap: 10,
 
-      // backgroundColor:"red"
-   },
-});
+// const style = StyleSheet.create({
+//    container: {
+//       // flex: 1,
+//       // justifyContent: "space-between",
+//       alignItems: "center",
+//       minHeight: height,
+//       backgroundColor: "#16213E",
+//       position: "relative",
+//       gap: 10,
+
+//       // backgroundColor:"red"
+//    },
+// });
 
 export default All;
