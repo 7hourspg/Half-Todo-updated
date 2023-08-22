@@ -68,11 +68,11 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
          //   translateX.value = withTiming(0);
          // }
 
-         if (translateX.value > -110) {
+         if (translateX.value > -80) {
             translateX.value = withTiming(0);
             // console.log("END:",translateX.value);
          } else if (translateX.value > -200 && translateX.value < -50) {
-            translateX.value = withTiming(-110);
+            translateX.value = withTiming(-140);
             // itemHeight.value = withTiming(0);
          } else {
             translateX.value = withTiming(-SCREEN_WIDTH);
@@ -127,7 +127,7 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
             </Animated.View>
          </PanGestureHandler>
          <Animated.View style={[styles.actionContainer, opacityAnimation]}>
-          <View style={{flex:2.3}}/>
+          <View style={{flex:1.5}}/>
             <View style={{flex:1,flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
                <Star name="star-outlined" size={30} color="black"  />
                <Calender name="calendar" size={30} color="black" />
