@@ -9,7 +9,7 @@ import Material from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ant from 'react-native-vector-icons/AntDesign';
 import Ion from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../Drawer/CustomDrawer';
-import PureColor from '../Theme/PureColor';
+import ThemePage from '../Theme/ThemePage';
 import { ThemeContext } from '../Context/ThemeContext';
 import Hola from '../Pages/Hola';
 const Drawer = () => {
@@ -22,19 +22,21 @@ const Drawer = () => {
           screenOptions={{
             headerShown: false,
             drawerType: 'back',
-            drawerActiveBackgroundColor: "#8B6AFE",
-            drawerActiveTintColor: 'gray',
-            borderWidth:2,
-            drawerItemStyle: {},
+            drawerActiveBackgroundColor: theme?.PrimaryColor,
+            // drawerInactiveBackgroundColor: "red",
+            // drawerActiveTintColor: "black",
+            // drawerStatusBarAnimation: "fade",
+            drawerActiveTintColor: "black",
+            drawerInactiveTintColor: "white",
+            // borderWidth:2,
+            // drawerItemStyle: {},
             drawerLabelStyle: {
               marginLeft: -20,
-              color:"white"||`${theme?.TextColor}`
+              // color:theme?.DrawerTextColor || theme?.TextColorPrimary,
               
             },
           }}
           drawerContent={(props) => <CustomDrawer {...props} />}
-
-          // Comment the above line because we are not using custom drawer for some reason
 
           initialRouteName='Home'
         >
@@ -42,8 +44,9 @@ const Drawer = () => {
             name="Home"
             component={BottomTab}
             options={{
-              drawerIcon: () => {
-                return <FontAwesome name="home" color={theme?.TextColor ||'purple'} size={25} />;
+              drawerIcon: (color) => {
+                // console.log(color, "COLOR")
+                return <FontAwesome name="home" color={color.color} size={25} />;
               },
             }}
           />
@@ -51,8 +54,8 @@ const Drawer = () => {
             name="Star Tasks"
             component={Hola}
             options={{
-              drawerIcon: () => {
-                return <Ant name="star" color={theme?.TextColor ||'purple'} size={25} />;
+              drawerIcon: (color) => {
+                return <Ant name="star" color={color.color} size={25} />;
               },
             }}
           />
@@ -60,17 +63,17 @@ const Drawer = () => {
             name="Category"
             component={BottomTab}
             options={{
-              drawerIcon: () => {
-                return <FontAw5 name="dice-five" color={theme?.TextColor ||'purple'} size={25} />;
+              drawerIcon: (color) => {
+                return <FontAw5 name="dice-five" color={color.color} size={25} />;
               },
             }}
           />
           <Drawer.Screen
             name="Theme"
-            component={PureColor}
+            component={ThemePage}
             options={{
-              drawerIcon: () => {
-                return <FontAw5 name="brush" color={theme?.TextColor ||'purple'} size={25} />;
+              drawerIcon: (color) => {
+                return <FontAw5 name="brush" color={color.color} size={25} />;
               },
             }}
           />
@@ -80,7 +83,7 @@ const Drawer = () => {
             options={{
               drawerIcon: () => {
                 return (
-                  <Material name="clipboard-edit" color={theme?.TextColor ||'purple'} size={25} />
+                  <Material name="clipboard-edit" color={theme?.IconColor} size={25} />
                 );
               },
             }}
@@ -90,7 +93,7 @@ const Drawer = () => {
             component={BottomTab}
             options={{
               drawerIcon: () => {
-                return <Ant name="questioncircle" color={theme?.TextColor ||'purple'} size={25} />;
+                return <Ant name="questioncircle" color={theme?.IconColor} size={25} />;
               },
             }}
           />
@@ -99,7 +102,7 @@ const Drawer = () => {
             component={BottomTab}
             options={{
               drawerIcon: () => {
-                return <Ion name="settings" color={theme?.TextColor ||'purple'} size={25} />;
+                return <Ion name="settings" color={theme?.IconColor} size={25} />;
               },
             }}
           />

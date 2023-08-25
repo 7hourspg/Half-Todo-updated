@@ -13,7 +13,7 @@ import {ThemeContext} from "../Context/ThemeContext";
 import All from "../Pages/HeaderPages/All/All";
 import AddTask from "./AddTask/AddTask";
 import Work from "../Pages/Work";
-import Personal from "../Pages/HeaderPages/Personal/Personal"
+import Personal from "../Pages/HeaderPages/Personal/Personal";
 import Wishlist from "../Pages/HeaderPages/Wishlist/Wishlist";
 import Birthday from "../Pages/HeaderPages/Birthday/Birthday";
 
@@ -103,8 +103,8 @@ function Toptab() {
          <Tab.Navigator
             initialRouteName="Feed"
             screenOptions={{
-               tabBarActiveTintColor: "white",
-               tabBarInactiveTintColor: "gray",
+               tabBarActiveTintColor: theme?.TextColorPrimary,
+               tabBarInactiveTintColor: theme?.InActiveColor,
 
                tabBarLabelStyle: {
                   fontSize: 13,
@@ -113,7 +113,7 @@ function Toptab() {
                },
                // 3B3D3C
                tabBarStyle: {
-                  backgroundColor: theme?.BottomTabBg || "white",
+                  backgroundColor: theme?.BackgroundColor,
                   backfaceVisibility: "visible",
                   elevation: 0,
                   padding: 5,
@@ -121,16 +121,14 @@ function Toptab() {
 
                   borderWidth: 1,
                   position: "absolute",
-                   borderColor:theme?.ActiveColor,
+                  borderColor: theme?.PrimaryColor,
                   margin: 10,
-                  // paddingHorizontal:10
-                  // marginHorizontal:10
                },
-               tabBarPressColor: theme?.Color,
+               tabBarPressColor: theme?.PrimaryColor,
                tabBarItemStyle: {width: 110},
                tabBarScrollEnabled: true,
                tabBarIndicatorStyle: {
-                  backgroundColor: theme?.ActiveColor || "purple",
+                  backgroundColor: theme?.PrimaryColor,
                   position: "absolute",
                   top: 0,
                   height: 48,
@@ -173,8 +171,6 @@ function Toptab() {
                options={{tabBarLabel: "Birthday"}}
             />
          </Tab.Navigator>
-         {/* </View> */}
-         {/* <AddTask/> */}
       </>
    );
 }

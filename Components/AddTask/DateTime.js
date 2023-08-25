@@ -4,7 +4,7 @@ import Calender from "react-native-vector-icons/AntDesign";
 import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const DateTime = ({setTaskDate}) => {
+const DateTime = ({setTaskDate,iconColor}) => {
    const [mydate, setDate] = useState(new Date());
    const [displaymode, setMode] = useState("date");
    const [isDisplayDate, setShow] = useState(false);
@@ -49,13 +49,13 @@ const DateTime = ({setTaskDate}) => {
             onPress={displayDatepicker}
             name="calendar"
             size={30}
-            color="black"
+            color={iconColor}
          />
          <Clock
             onPress={displayTimepicker}
             name="clock"
             size={30}
-            color="black"
+            color={iconColor}
          />
 
          {isDisplayDate && (

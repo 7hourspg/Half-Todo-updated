@@ -17,8 +17,10 @@ import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import Star from "react-native-vector-icons/Entypo";
 import Notibell from "react-native-vector-icons/Ionicons";
 import { DataContext } from "../Context/DataContext";
+import { ThemeContext } from "../Context/ThemeContext";
 
 const ListItem = ({taskData, simultaneousHandlers}) => {
+   const {theme} = useContext(ThemeContext)
    // console.log(taskData, "DATA FROM LIST ITEM")
    const {onDismiss} = useContext(DataContext)
    // console.log(taskData, "DATA FROM LIST ITEM");
@@ -109,7 +111,35 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
       };
    });
 
-   console.log(taskData?.taskDate)
+   // console.log(taskData?.taskDate)
+
+   // STYELS
+
+   const styles = StyleSheet.create({
+      container: {
+         backgroundColor: theme?.PrimaryColor,
+         width: 350,
+         // height: 70,
+   //   alignItems: "center",
+         justifyContent: "space-evenly",
+         borderRadius: 10,
+         zIndex: 1,
+         // marginBottom:20
+         fontSize: 20,
+         marginHorizontal: 5,
+         paddingHorizontal: 10,
+      },
+      actionContainer: {
+         backgroundColor: theme?.SecondaryColor,
+         width: 350,
+         height: 70,
+         alignItems: "end",
+         justifyContent: "space-evenly",
+         borderRadius: 17,
+         position: "absolute",
+         flexDirection: "row",
+      },
+   });
 
    return (
       <View>
@@ -120,7 +150,7 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
             <Animated.View
                style={[styles.container, transAnimation, containerStyle]}
             >
-               <Text style={{fontSize:17,color:"white"}}>{taskData?.taskTitle}</Text>
+               <Text style={{fontSize:17,color:theme?.TextColorPrimary}}>{taskData?.taskTitle}</Text>
 
                <Text style={{fontSize:13,color:"#F2EAD3",}}>03-08 08:37 pm {taskData.taskDate&& <Notibell name="notifications-circle-sharp" size={20} color="#F2EAD3"  />}</Text>
 
@@ -138,30 +168,6 @@ const ListItem = ({taskData, simultaneousHandlers}) => {
    );
 };
 
-const styles = StyleSheet.create({
-   container: {
-      backgroundColor: "#8B6AFE",
-      width: 350,
-      // height: 70,
-//   alignItems: "center",
-      justifyContent: "space-evenly",
-      borderRadius: 10,
-      zIndex: 1,
-      // marginBottom:20
-      fontSize: 20,
-      marginHorizontal: 5,
-      paddingHorizontal: 10,
-   },
-   actionContainer: {
-      backgroundColor: "#BEADFA",
-      width: 350,
-      height: 70,
-      alignItems: "end",
-      justifyContent: "space-evenly",
-      borderRadius: 17,
-      position: "absolute",
-      flexDirection: "row",
-   },
-});
+
 
 export default ListItem;

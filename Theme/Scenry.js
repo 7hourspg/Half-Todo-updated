@@ -9,7 +9,7 @@ const Scenry = () => {
   return (
     <View style={styles.Main_ctr}>
       <View>
-        <Text style={{ color: 'black', marginLeft: 20, fontSize: 16 }}>
+        <Text style={{ color: 'white', marginLeft: 20, fontSize: 16 }}>
           Scenry
         </Text>
       </View>
@@ -44,6 +44,10 @@ export default Scenry;
 const styles = StyleSheet.create({
   Main_ctr: {
     flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'black',
+    // color: 'white',
+    // height: 250,
+    // backgroundColor: 'red',
+    marginTop: 40,
   },
 });

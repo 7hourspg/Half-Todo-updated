@@ -6,7 +6,7 @@ import {
    TextInput,
    Keyboard,
 } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
    Gesture,
    GestureDetector,
@@ -21,8 +21,10 @@ import Animated, {
 } from "react-native-reanimated";
 import SelectDropdown from "react-native-select-dropdown";
 import BottomSheetInnerContainer from "./BottomSheetInnerContainer";
+import {ThemeContext} from "../../Context/ThemeContext";
 
 const BottomSheet = ({setShowTextInput}) => {
+   const {theme} = useContext(ThemeContext);
    const {height: SCREEN_HEIGHT, width} = Dimensions.get("window");
    // const [keyboardStatus, setKeyboardStatus] = useState("");
 
@@ -71,6 +73,34 @@ const BottomSheet = ({setShowTextInput}) => {
       translateY.value = withSpring(-SCREEN_HEIGHT + 560);
    }, []);
 
+
+   // STYLES
+
+   const {height} = Dimensions.get("screen");
+
+const styles = StyleSheet.create({
+   container: {
+      height: height,
+      backgroundColor: theme?.BottomSheetColorBG,
+      width: width,
+      position: "absolute",
+      top: 0,
+      borderRadius: 20,
+      alignItems: "center",
+   },
+   line: {
+      width: 100,
+      height: 5,
+      backgroundColor: theme?.SecondaryColor,
+      borderRadius: 10,
+      marginTop: 10,
+   },
+
+   innerContainer: {
+      marginTop: 20,
+   },
+});
+
    return (
       <GestureHandlerRootView style={{flex: 1, width: width}}>
          <GestureDetector gesture={gesture}>
@@ -83,29 +113,6 @@ const BottomSheet = ({setShowTextInput}) => {
    );
 };
 
-const {height, width} = Dimensions.get("screen");
 
-const styles = StyleSheet.create({
-   container: {
-      height: height,
-      backgroundColor: "#160040",
-      width: width,
-      position: "absolute",
-      top: 0,
-      borderRadius: 20,
-      alignItems: "center",
-   },
-   line: {
-      width: 100,
-      height: 5,
-      backgroundColor: "#BEADFA",
-      borderRadius: 10,
-      marginTop: 10,
-   },
-
-   innerContainer: {
-      marginTop: 20,
-   },
-});
 
 export default BottomSheet;

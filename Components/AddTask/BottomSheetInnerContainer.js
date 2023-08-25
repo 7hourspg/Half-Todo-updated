@@ -6,7 +6,6 @@ import {
    Dimensions,
    TextInput,
    TouchableOpacity,
-   
 } from "react-native";
 import React, {useState, useContext} from "react";
 // import SelectDropdown from "react-native-select-dropdown";
@@ -16,9 +15,11 @@ import Icon from "react-native-vector-icons/Ionicons";
 import {DataContext} from "../../Context/DataContext";
 import {v4 as uuidv4} from "uuid";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {ThemeContext} from "./../../Context/ThemeContext";
 
 const BottomSheetInnerContainer = () => {
-   const {data, setData, getTasksData,setTasksData} = useContext(DataContext);
+   const {data, setData, getTasksData, setTasksData} = useContext(DataContext);
+   const {theme} = useContext(ThemeContext);
    const [taskTitle, setTaskTitle] = useState("");
    const [taskCategory, setTaskCategory] = useState("");
    const [taskDate, setTaskDate] = useState(null);
@@ -73,17 +74,17 @@ const BottomSheetInnerContainer = () => {
          alert("Please enter task 😊");
          return;
       } else {
-            // setData([
-            //    ...data,
-            //    {
-            //       taskTitle,
-            //       taskCategory,
-            //       taskDate,
-            //       // taskTime,
-            //       isTaskCompleted: false,
-            //       id: uuidv4(),
-            //    },
-            // ]);
+         // setData([
+         //    ...data,
+         //    {
+         //       taskTitle,
+         //       taskCategory,
+         //       taskDate,
+         //       // taskTime,
+         //       isTaskCompleted: false,
+         //       id: uuidv4(),
+         //    },
+         // ]);
 
          setTasksData({
             taskTitle,
@@ -99,12 +100,88 @@ const BottomSheetInnerContainer = () => {
       setTaskDate(null);
       // setTaskTime(null);
       setTaskValue("1");
-      // getTasksData();   
+      // getTasksData();
    };
 
    // console.log(uuidv4(), "UUID");
 
    // console.log(data, "DATA FROM REDUCER")
+
+   // STYLES
+
+   const {width} = Dimensions.get("window");
+   const styles = StyleSheet.create({
+      container: {
+         marginTop: 20,
+      },
+      input: {
+         padding: 10,
+         borderWidth: 0.5,
+         borderRadius: 10,
+         // marginBottom: 50,
+         width: width - 50,
+         backgroundColor: theme?.SecondaryColor,
+         paddingVertical: 20,
+         color: theme?.TextColorSecondary,
+         fontSize: 17,
+         //  fontWeight: "bold",
+      },
+      innerContainer: {
+         // marginVertical: 10,
+         position: "relative",
+         overflow: "hidden",
+         display: "flex",
+         flexDirection: "row",
+         justifyContent: "space-between",
+         alignItems: "center",
+      },
+      dropdown: {
+         //   margin: 16,
+         height: 50,
+         //  borderBottomColor: "gray",
+         //  borderBottomWidth: 0.5,
+         backgroundColor: theme?.SecondaryColor,
+         width: 160,
+         // alignSelf:"center",
+         borderRadius: 20,
+         padding: 10,
+         overflow: "hidden",
+         paddingBottom: 10,
+         // color: "white",
+      },
+      imageStyle: {
+         width: 24,
+         height: 24,
+         //  display: "none",
+      },
+      placeholderStyle: {
+         fontSize: 16,
+         color: "red",
+      },
+      selectedTextStyle: {
+         fontSize: 16,
+         marginLeft: 8,
+         color: theme?.TextColorSecondary,
+         //  backgroundColor:"red"
+         borderRadius: 20,
+      },
+      iconStyle: {
+         width: 20,
+         height: 20,
+      },
+      inputSearchStyle: {
+         height: 40,
+         fontSize: 16,
+      },
+      submitContainer: {
+         backgroundColor: theme?.PrimaryColor,
+         alignSelf: "center",
+         marginBottom: 20,
+         paddingVertical: 5,
+         paddingHorizontal: 15,
+         borderRadius: 20,
+      },
+   });
 
    return (
       <View style={styles.container}>
@@ -140,7 +217,7 @@ const BottomSheetInnerContainer = () => {
                   setTaskValue(e.value);
                }}
                onFocus={() => Keyboard.dismiss()}
-               activeColor={"#BEADFA"}
+               activeColor={theme?.PrimaryColor}
                autoScrollToDefaultValue={true}
                dropdownPosition="top"
                containerStyle={{
@@ -152,7 +229,7 @@ const BottomSheetInnerContainer = () => {
                showsVerticalScrollIndicator={false}
             />
             {/* <Text>Hello</Text> */}
-            <DateTime setTaskDate={setTaskDate} />
+            <DateTime setTaskDate={setTaskDate} iconColor={theme?.TextColorSecondary} />
          </View>
          <TouchableOpacity
             onPress={() => {
@@ -161,84 +238,14 @@ const BottomSheetInnerContainer = () => {
             }}
             style={styles.submitContainer}
          >
-            <Icon name="checkmark-done-circle-sharp" size={35} color="white" />
+            <Icon
+               name="checkmark-done-circle-sharp"
+               size={35}
+               color={theme?.IconColor}
+            />
          </TouchableOpacity>
       </View>
    );
 };
-const {width} = Dimensions.get("window");
-const styles = StyleSheet.create({
-   container: {
-      marginTop: 20,
-   },
-   input: {
-      padding: 10,
-      borderWidth: 0.5,
-      borderRadius: 10,
-      // marginBottom: 50,
-      width: width - 50,
-      backgroundColor: "#BEADFA",
-      paddingVertical: 20,
-      color: "#160040",
-      fontSize: 17,
-      //  fontWeight: "bold",
-      
-   },
-   innerContainer: {
-      // marginVertical: 10,
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-   },
-   dropdown: {
-      //   margin: 16,
-      height: 50,
-      //  borderBottomColor: "gray",
-      //  borderBottomWidth: 0.5,
-      backgroundColor: "#BEADFA",
-      width: 160,
-      // alignSelf:"center",
-      borderRadius: 20,
-      padding: 10,
-      overflow: "hidden",
-      paddingBottom: 10,
-      // color: "white",
-   },
-   imageStyle: {
-      width: 24,
-      height: 24,
-      //  display: "none",
-   },
-   placeholderStyle: {
-      fontSize: 16,
-      color: "red",
-   },
-   selectedTextStyle: {
-      fontSize: 16,
-      marginLeft: 8,
-      color: "#160040",
-      //  backgroundColor:"red"
-      borderRadius: 20,
-   },
-   iconStyle: {
-      width: 20,
-      height: 20,
-   },
-   inputSearchStyle: {
-      height: 40,
-      fontSize: 16,
-   },
-   submitContainer: {
-      backgroundColor: "#8B6AFE",
-      alignSelf: "center",
-      marginBottom: 20,
-      paddingVertical: 5,
-      paddingHorizontal: 15,
-      borderRadius: 20,
-   },
-});
 
 export default BottomSheetInnerContainer;
