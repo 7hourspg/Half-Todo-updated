@@ -4,7 +4,7 @@ import Calender from "react-native-vector-icons/AntDesign";
 import Clock from "react-native-vector-icons/MaterialCommunityIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const DateTime = ({setTaskDate,iconColor}) => {
+const DateTime = ({setTaskDate, iconColor, containerColor}) => {
    const [mydate, setDate] = useState(new Date());
    const [displaymode, setMode] = useState("date");
    const [isDisplayDate, setShow] = useState(false);
@@ -14,20 +14,18 @@ const DateTime = ({setTaskDate,iconColor}) => {
          setShow(false);
          return;
       } else if (event.type === "set") {
-         // console.log(event, "event");
          const currentDate = selectedDate || mydate;
-         // console.log(currentDate, "currentDate");
          setDate(currentDate);
-         // console.log(event)
          setShow(false);
          const newDate = new Date(currentDate);
          console.log(
-            newDate.toISOString().split("T")[0].split("-").join("-")
-         ,"Hello from Date");
-         // console.log(
-         //    newDate.toISOString().split("T")[0].split("-").reverse().join("-")
-         // );
-         setTaskDate([newDate.toISOString().split("T")[0].split("-").join("-"),newDate.toLocaleTimeString()]);
+            newDate.toISOString().split("T")[0].split("-").join("-"),
+            "Hello from Date"
+         );
+         setTaskDate([
+            newDate.toISOString().split("T")[0].split("-").join("-"),
+            newDate.toLocaleTimeString(),
+         ]);
          console.log(newDate.toLocaleTimeString());
       }
    };
@@ -42,7 +40,22 @@ const DateTime = ({setTaskDate,iconColor}) => {
       showMode("time");
       Keyboard.dismiss();
    };
-   // console.log(mydate,"mydate")
+
+   const styles = StyleSheet.create({
+      container: {
+         flexDirection: "row",
+         justifyContent: "space-around",
+         alignItems: "center",
+         width: 160,
+         marginTop: 20,
+         marginBottom: 20,
+         padding: 10,
+         backgroundColor: containerColor,
+         borderRadius: 20,
+         overflow: "hidden",
+         paddingBottom: 10,
+      },
+   });
    return (
       <View style={styles.container}>
          <Calender
@@ -66,12 +79,6 @@ const DateTime = ({setTaskDate,iconColor}) => {
                is24Hour={false}
                display="default"
                onChange={changeSelectedDate}
-               // onChange={(event, selectedDate) => {
-               //    const currentDate = selectedDate || mydate;
-               //    setDate(currentDate);
-               //    setShow(false);
-               // }}
-               // minimumDate={new Date()}
                positiveButton={{label: "OK", textColor: "green"}}
                negativeButton={{label: "Cancel", textColor: "red"}}
                style={{backgroundColor: "black"}}
@@ -82,21 +89,5 @@ const DateTime = ({setTaskDate,iconColor}) => {
       </View>
    );
 };
-
-const styles = StyleSheet.create({
-   container: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-      alignItems: "center",
-      width: 160,
-      marginTop: 20,
-      marginBottom: 20,
-      padding: 10,
-      backgroundColor: "#BEADFA",
-      borderRadius: 20,
-      overflow: "hidden",
-      paddingBottom: 10,
-   },
-});
 
 export default DateTime;

@@ -1,6 +1,5 @@
-import {createContext, useContext, useState, useEffect} from "react";
+import {createContext, useState, useEffect} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {View, Text} from "react-native";
 
 export const ThemeContext = createContext(null);
 
@@ -8,12 +7,9 @@ export default function ThemeProvider({children}) {
    const [isLoading, setIsLoading] = useState(false);
    const [theme, setTheme] = useState(theme);
 
-   const [Scenery, setScenery] = useState("");
-
    // Setting Color Data in Local Storage
 
    const setColorData = async (Data) => {
-      console.log(Data, "DATA")
       try {
          const jsonValue = JSON.stringify(Data);
 
@@ -21,11 +17,8 @@ export default function ThemeProvider({children}) {
 
          getColorData();
       } catch (e) {
-         // console.log(e, "ERROR");
+         console.log(e, "ERROR");
       }
-   };
-   const getScenery = (Data) => {
-      setScenery(Data);
    };
 
    // Getting Data From Local Storage
@@ -42,74 +35,36 @@ export default function ThemeProvider({children}) {
             setIsLoading(false);
          }, 1000);
       } catch (e) {
-         // console.log(e);
+         console.log(e, "ERROR");
       }
    };
 
    useEffect(() => {
       getColorData();
-      
    }, []);
 
-   console.log(theme, "THEME")
-
-   if(theme===null){
-      console.log("NO THEME SELECTED")
+   if (theme === null) {
       setColorData({
          id: 8,
-         Color: "#000000",
-         TabBackgroundColor: "red",
          BackgroundColor: "#000000",
-         primaryColor: "#8B6AFE",
-         secondaryColor: "#BEADFA",
-         textColorPrimary: "#FFFFFF",
-         textColorSecondary: "#000",
-   
-         topTab: {
-            backgroundColor: "#000000",
-            borderColor: "#8B6AFE",
-            activeColor: "#8B6AFE",
+         PrimaryColor: "#8B6AFE",
+         SecondaryColor: "#BEADFA",
+         TextColorPrimary: "#FFFFFF",
+         TextColorSecondary: "#000",
+         InActiveColor: "#8E8E8F",
+         IconColor: "#FFFFFF",
+         BarStyle: "light-content",
+         BottomSheetColorBG: "#160040",
+         drawer: {
+            drawerActiveBackgroundColor: "#8B6AFE",
+            drawerActiveTintColor: "#000",
+            drawerInactiveTintColor: "#FFFFFF",
          },
-   
-         bottomTab: {
-            backgroundColor: "#000000",
-            borderColor: "#8B6AFE",
-            activeColor: "#8B6AFE",
-         },
-   
-         BottomSheet: {
-            backgroundColor: "#160040",
-            lineColor: "#BEADFA",
-            inputTextColor: "#160040",
-            allComponentColor: "#BEADFA",
-            submitButtonColor: "#8B6AFE",
-         },
-   
-         Drawer: {
-            backgroundColor: "#000000",
-            textColor: "white",
-            activeColor: "#8B6AFE",
-            iconColor: "white",
-         },
-   
-         AddTask: {
-            color: "#8B6AFE",
-            iconColor: "white",
-         },
-   
-         ListItem: {
-            primaryColor: "#8B6AFE",
-            secondaryColor: "#BEADFA",
-            textColor: "white",
-            iconColor: "black",
-         },
-      })
+      });
    }
 
    return (
-      <ThemeContext.Provider
-         value={{setColorData, theme, Scenery, getScenery, isLoading}}
-      >
+      <ThemeContext.Provider value={{setColorData, theme, isLoading}}>
          {children}
       </ThemeContext.Provider>
    );

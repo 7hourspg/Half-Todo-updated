@@ -1,16 +1,15 @@
 import * as React from "react";
-import { TouchableOpacity, View} from "react-native";
+import {TouchableOpacity, View} from "react-native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import EvilIcon from "react-native-vector-icons/EvilIcons";
 import Foundation from "react-native-vector-icons/Foundation";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import Calender from "../Pages/Calender";
-import Mine from "../Pages/Mine";
+import Calender from "../../Pages/Calender/Calender";
+import Mine from "../../Pages/Mine/Mine";
 import Toptab from "./Toptab";
-import {ThemeContext} from "../Context/ThemeContext";
+import {ThemeContext} from "../../Context/ThemeContext";
 
 export default function App({navigation}) {
-
    const {theme} = React.useContext(ThemeContext);
    const Tab = createBottomTabNavigator();
 
@@ -21,6 +20,7 @@ export default function App({navigation}) {
             screenOptions={() => ({
                headerShown: false,
                tabBarActiveTintColor: theme?.PrimaryColor,
+               tabBarInactiveTintColor: theme?.InActiveColor,
                tabBarStyle: {
                   height: 70,
                   paddingHorizontal: 5,

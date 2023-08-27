@@ -1,9 +1,6 @@
-import {View, Text, Button, StyleSheet, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import React from "react";
 
-{
-   /* Nested ROUTE is Here🫡❤️ */
-}
 import Back from "react-native-vector-icons/Ionicons";
 
 const TopBckBtn = ({navigation}) => {
@@ -36,7 +33,6 @@ const TopBckBtn = ({navigation}) => {
 export default TopBckBtn;
 const styles = StyleSheet.create({
    container: {
-      // backgroundColor: "#8B6AFE",
       height: 60,
    },
    bckBtn: {
@@ -51,10 +47,3 @@ const styles = StyleSheet.create({
       fontSize: 30,
    },
 });
-
-{
-   /* <Button
-onPress={() => navigation.navigate('Home', { screen: 'Tasks' })}
-title="Go back home"
-/> */
-}

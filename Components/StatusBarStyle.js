@@ -1,11 +1,11 @@
 import {View, StatusBar} from "react-native";
-import React,{useContext} from "react";
+import React, {useContext} from "react";
 import {ThemeContext} from "../Context/ThemeContext";
 
 const StatusBarStyle = () => {
-  const {theme} = useContext(ThemeContext);
+   const {theme} = useContext(ThemeContext);
 
-  return (
+   return (
       <View style={{height: StatusBar.currentHeight}}>
          <StatusBar
             translucent={true}

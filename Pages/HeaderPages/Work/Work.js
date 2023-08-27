@@ -7,16 +7,19 @@ import {ScrollView} from "react-native-gesture-handler";
 import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
 import {ThemeContext} from "../../../Context/ThemeContext";
 
-const Personal = () => {
+const Work = () => {
    const {theme} = React.useContext(ThemeContext);
+
    const {height} = Dimensions.get("window");
    const {data} = React.useContext(DataContext);
    const [tasks, setTasks] = React.useState(null);
    const scrollRef = useRef(null);
 
    useEffect(() => {
-      setTasks(data?.filter((item) => item.taskCategory === "Personal"));
+      setTasks(data?.filter((item) => item.taskCategory === "Work"));
    }, [data]);
+
+   // STYLES
 
    const style = StyleSheet.create({
       container: {
@@ -30,11 +33,7 @@ const Personal = () => {
 
    return (
       <>
-         <ScrollView
-            ref={scrollRef}
-            pagingEnabled={false}
-            bakcgroundColor="black"
-         >
+         <ScrollView ref={scrollRef} pagingEnabled={false}>
             <View style={style.container}>
                <View
                   style={{
@@ -64,4 +63,4 @@ const Personal = () => {
    );
 };
 
-export default Personal;
+export default Work;

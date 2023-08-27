@@ -1,6 +1,5 @@
-import {View, Text, StatusBar, StyleSheet, SafeAreaView} from "react-native";
-import React, {useContext} from "react";
-import Home from "./Pages/Home";
+import {View, StyleSheet} from "react-native";
+import Home from "./Components/Home/Home";
 import StatusBarStyle from "./Components/StatusBarStyle";
 import {NavigationContainer} from "@react-navigation/native";
 import "react-native-gesture-handler";

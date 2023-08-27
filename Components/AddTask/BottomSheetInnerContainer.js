@@ -8,30 +8,20 @@ import {
    TouchableOpacity,
 } from "react-native";
 import React, {useState, useContext} from "react";
-// import SelectDropdown from "react-native-select-dropdown";
 import {SelectCountry as SelectDropdown} from "react-native-element-dropdown";
 import DateTime from "./DateTime";
 import Icon from "react-native-vector-icons/Ionicons";
 import {DataContext} from "../../Context/DataContext";
 import {v4 as uuidv4} from "uuid";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {ThemeContext} from "./../../Context/ThemeContext";
 
 const BottomSheetInnerContainer = () => {
-   const {data, setData, getTasksData, setTasksData} = useContext(DataContext);
+   const {setTasksData} = useContext(DataContext);
    const {theme} = useContext(ThemeContext);
    const [taskTitle, setTaskTitle] = useState("");
    const [taskCategory, setTaskCategory] = useState("");
    const [taskDate, setTaskDate] = useState(null);
-   // const [taskTime, setTaskTime] = useState(null);
    const [taskValue, setTaskValue] = useState("1");
-
-   // id: 1,
-   //    taskTitle: "Hello",
-   //    taskCategory: "Work",
-   //    taskDate: "2021-05-25",
-   //    taskTime: "12:00",
-   //    isTaskCompleted: false,
 
    const task_Type = [
       {
@@ -56,41 +46,15 @@ const BottomSheetInnerContainer = () => {
       },
    ];
 
-   // const setTasksData = async (Data) => {
-   //    console.log(Data, "DATA FROM REDUCER")
-   //    try {
-   //       const jsonValue = JSON.stringify([...data, Data]);
-
-   //       await AsyncStorage.setItem("tasks", jsonValue);
-
-   //       getTasksData();
-   //    } catch (e) {
-   //       console.log(e, "ERROR");
-   //    }
-   // };
-
    const submitTask = () => {
       if (!taskTitle) {
          alert("Please enter task 😊");
          return;
       } else {
-         // setData([
-         //    ...data,
-         //    {
-         //       taskTitle,
-         //       taskCategory,
-         //       taskDate,
-         //       // taskTime,
-         //       isTaskCompleted: false,
-         //       id: uuidv4(),
-         //    },
-         // ]);
-
          setTasksData({
             taskTitle,
             taskCategory,
             taskDate,
-            // taskTime,
             isTaskCompleted: false,
             id: uuidv4(),
          });
@@ -98,14 +62,8 @@ const BottomSheetInnerContainer = () => {
       setTaskTitle("");
       setTaskCategory("");
       setTaskDate(null);
-      // setTaskTime(null);
       setTaskValue("1");
-      // getTasksData();
    };
-
-   // console.log(uuidv4(), "UUID");
-
-   // console.log(data, "DATA FROM REDUCER")
 
    // STYLES
 
@@ -118,16 +76,13 @@ const BottomSheetInnerContainer = () => {
          padding: 10,
          borderWidth: 0.5,
          borderRadius: 10,
-         // marginBottom: 50,
          width: width - 50,
          backgroundColor: theme?.SecondaryColor,
          paddingVertical: 20,
          color: theme?.TextColorSecondary,
          fontSize: 17,
-         //  fontWeight: "bold",
       },
       innerContainer: {
-         // marginVertical: 10,
          position: "relative",
          overflow: "hidden",
          display: "flex",
@@ -136,34 +91,32 @@ const BottomSheetInnerContainer = () => {
          alignItems: "center",
       },
       dropdown: {
-         //   margin: 16,
          height: 50,
-         //  borderBottomColor: "gray",
-         //  borderBottomWidth: 0.5,
          backgroundColor: theme?.SecondaryColor,
-         width: 160,
-         // alignSelf:"center",
+         width: 170,
          borderRadius: 20,
          padding: 10,
          overflow: "hidden",
          paddingBottom: 10,
-         // color: "white",
+         width: width / 2.1,
       },
       imageStyle: {
          width: 24,
          height: 24,
-         //  display: "none",
+         display: "none",
       },
       placeholderStyle: {
          fontSize: 16,
-         color: "red",
       },
       selectedTextStyle: {
          fontSize: 16,
          marginLeft: 8,
          color: theme?.TextColorSecondary,
-         //  backgroundColor:"red"
          borderRadius: 20,
+         backgroundColor: theme?.SecondaryColor,
+         textAlign: "center",
+         marginRight: 25,
+         alignContent: "center",
       },
       iconStyle: {
          width: 20,
@@ -207,12 +160,7 @@ const BottomSheetInnerContainer = () => {
                data={task_Type}
                valueField="value"
                labelField="lable"
-               // imageField="image"
-               // placeholder="Select country"
-               // searchPlaceholder="Search..."
                onChange={(e) => {
-                  // setTaskCategory(e.lable);
-                  // console.log({label: e.lable, value: e.value});
                   setTaskCategory(e.lable);
                   setTaskValue(e.value);
                }}
@@ -224,17 +172,18 @@ const BottomSheetInnerContainer = () => {
                   borderRadius: 20,
                   overflow: "hidden",
                   marginBottom: -10,
-                  //    alignSelf: "center",
                }}
                showsVerticalScrollIndicator={false}
             />
-            {/* <Text>Hello</Text> */}
-            <DateTime setTaskDate={setTaskDate} iconColor={theme?.TextColorSecondary} />
+            <DateTime
+               setTaskDate={setTaskDate}
+               iconColor={theme?.TextColorSecondary}
+               containerColor={theme?.SecondaryColor}
+            />
          </View>
          <TouchableOpacity
             onPress={() => {
                submitTask();
-               // getTasksData();
             }}
             style={styles.submitContainer}
          >

@@ -1,12 +1,5 @@
-import {
-   View,
-   Text,
-   StyleSheet,
-   Dimensions,
-   TextInput,
-   Keyboard,
-} from "react-native";
-import React, {useContext, useEffect, useState} from "react";
+import {View, StyleSheet, Dimensions} from "react-native";
+import React, {useContext, useEffect} from "react";
 import {
    Gesture,
    GestureDetector,
@@ -19,14 +12,12 @@ import Animated, {
    withSpring,
    withTiming,
 } from "react-native-reanimated";
-import SelectDropdown from "react-native-select-dropdown";
 import BottomSheetInnerContainer from "./BottomSheetInnerContainer";
 import {ThemeContext} from "../../Context/ThemeContext";
 
 const BottomSheet = ({setShowTextInput}) => {
    const {theme} = useContext(ThemeContext);
    const {height: SCREEN_HEIGHT, width} = Dimensions.get("window");
-   // const [keyboardStatus, setKeyboardStatus] = useState("");
 
    const shouldVisible = (arg) => {
       setTimeout(() => {
@@ -73,33 +64,32 @@ const BottomSheet = ({setShowTextInput}) => {
       translateY.value = withSpring(-SCREEN_HEIGHT + 560);
    }, []);
 
-
    // STYLES
 
    const {height} = Dimensions.get("screen");
 
-const styles = StyleSheet.create({
-   container: {
-      height: height,
-      backgroundColor: theme?.BottomSheetColorBG,
-      width: width,
-      position: "absolute",
-      top: 0,
-      borderRadius: 20,
-      alignItems: "center",
-   },
-   line: {
-      width: 100,
-      height: 5,
-      backgroundColor: theme?.SecondaryColor,
-      borderRadius: 10,
-      marginTop: 10,
-   },
+   const styles = StyleSheet.create({
+      container: {
+         height: height,
+         backgroundColor: theme?.BottomSheetColorBG,
+         width: width,
+         position: "absolute",
+         top: 0,
+         borderRadius: 20,
+         alignItems: "center",
+      },
+      line: {
+         width: 100,
+         height: 5,
+         backgroundColor: theme?.SecondaryColor,
+         borderRadius: 10,
+         marginTop: 10,
+      },
 
-   innerContainer: {
-      marginTop: 20,
-   },
-});
+      innerContainer: {
+         marginTop: 20,
+      },
+   });
 
    return (
       <GestureHandlerRootView style={{flex: 1, width: width}}>
@@ -112,7 +102,5 @@ const styles = StyleSheet.create({
       </GestureHandlerRootView>
    );
 };
-
-
 
 export default BottomSheet;
