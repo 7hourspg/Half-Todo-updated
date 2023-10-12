@@ -1,33 +1,26 @@
-import {View, Text, StatusBar, StyleSheet,SafeAreaView} from "react-native";
-import React, {useContext} from "react";
-import Home from "./Pages/Home";
-import TopMargin from "./Components/TopMargin";
+import {View, StyleSheet} from "react-native";
+import Home from "./Components/Home/Home";
+import StatusBarStyle from "./Components/StatusBarStyle";
 import {NavigationContainer} from "@react-navigation/native";
 import "react-native-gesture-handler";
 
-import MyApp from "./Context/ThemeContext";
-// import {SafeAreaView} from "react-native-safe-area-context";
+import ThemeProvider from "./Context/ThemeContext";
+import {DataProvider} from "./Context/DataContext";
 
 const index = () => {
    return (
-      <MyApp>
-         <StatusBar
-            // translucent={true}
-            barStyle="light-content" //light-content
-            backgroundColor={"black"}
-         />
-
-         {/* <StatusBar translucent={true} animated={true} /> */}
-         <SafeAreaView style={{flex: 1}}>
+      <ThemeProvider>
+         <StatusBarStyle />
+         <View style={{flex: 1}}>
             <View style={styles.container}>
                <NavigationContainer>
-                  {/* <TopMargin /> */}
-
-                  <Home />
+                  <DataProvider>
+                     <Home />
+                  </DataProvider>
                </NavigationContainer>
             </View>
-         </SafeAreaView>
-      </MyApp>
+         </View>
+      </ThemeProvider>
    );
 };
 const styles = StyleSheet.create({
@@ -37,5 +30,3 @@ const styles = StyleSheet.create({
 });
 
 export default index;
-
-// <View style={{position:"absolute", bottom:10,zIndex:100,backgroundColor:"red"}}><Text>Hello</Text></View>

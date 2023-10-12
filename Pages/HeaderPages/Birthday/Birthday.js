@@ -1,27 +1,23 @@
-import {View, StyleSheet, Dimensions} from "react-native";
-import React, {useRef, useState, useEffect} from "react";
-import ListItem from "../../../Components/List/ListItem";
-
-import {ScrollView} from "react-native-gesture-handler";
+import {View, Dimensions, StyleSheet} from "react-native";
+import React, {useRef, useEffect} from "react";
 import AddTask from "../../../Components/AddTask/AddTask";
 import {DataContext} from "../../../Context/DataContext";
+import ListItem from "../../../Components/List/ListItem";
+import {ScrollView} from "react-native-gesture-handler";
 import NothingToShow from "../../../Components/NothingToShow/NothingToShow";
 import {ThemeContext} from "../../../Context/ThemeContext";
 
-const All = () => {
+const Birthday = () => {
+   const {theme} = React.useContext(ThemeContext);
+   const {height} = Dimensions.get("window");
+   const {data} = React.useContext(DataContext);
+   const [tasks, setTasks] = React.useState(null);
    const scrollRef = useRef(null);
 
-   const {data} = React.useContext(DataContext);
-   const {theme} = React.useContext(ThemeContext);
-
-   const [tasks, setTasks] = useState(data);
-
    useEffect(() => {
-      setTasks(data);
+      setTasks(data?.filter((item) => item.taskCategory === "Birthday"));
    }, [data]);
 
-   // STYLES
-   const {height} = Dimensions.get("window");
    const style = StyleSheet.create({
       container: {
          alignItems: "center",
@@ -64,4 +60,4 @@ const All = () => {
    );
 };
 
-export default All;
+export default Birthday;

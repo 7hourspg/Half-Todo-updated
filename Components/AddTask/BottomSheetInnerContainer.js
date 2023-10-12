@@ -1,22 +1,29 @@
+import "react-native-get-random-values";
 import {
    View,
-   Text,
    Keyboard,
    StyleSheet,
    Dimensions,
    TextInput,
    TouchableOpacity,
-   Modal,
-   FlatList,
 } from "react-native";
-import React, {useState, useRef} from "react";
-import SelectDropdown from "react-native-select-dropdown";
-import {SelectCountry} from "react-native-element-dropdown";
+import React, {useState, useContext} from "react";
+import {SelectCountry as SelectDropdown} from "react-native-element-dropdown";
 import DateTime from "./DateTime";
+import Icon from "react-native-vector-icons/Ionicons";
+import {DataContext} from "../../Context/DataContext";
+import {v4 as uuidv4} from "uuid";
+import {ThemeContext} from "./../../Context/ThemeContext";
 
 const BottomSheetInnerContainer = () => {
-   const [country, setCountry] = useState("1");
-   const local_data = [
+   const {setTasksData} = useContext(DataContext);
+   const {theme} = useContext(ThemeContext);
+   const [taskTitle, setTaskTitle] = useState("");
+   const [taskCategory, setTaskCategory] = useState("");
+   const [taskDate, setTaskDate] = useState(null);
+   const [taskValue, setTaskValue] = useState("1");
+
+   const task_Type = [
       {
          value: "1",
          lable: "No Category",
@@ -39,18 +46,108 @@ const BottomSheetInnerContainer = () => {
       },
    ];
 
+   const submitTask = () => {
+      if (!taskTitle) {
+         alert("Please enter task 😊");
+         return;
+      } else {
+         setTasksData({
+            taskTitle,
+            taskCategory,
+            taskDate,
+            isTaskCompleted: false,
+            id: uuidv4(),
+         });
+      }
+      setTaskTitle("");
+      setTaskCategory("");
+      setTaskDate(null);
+      setTaskValue("1");
+   };
+
+   // STYLES
+
+   const {width} = Dimensions.get("window");
+   const styles = StyleSheet.create({
+      container: {
+         marginTop: 20,
+      },
+      input: {
+         padding: 10,
+         borderWidth: 0.5,
+         borderRadius: 10,
+         width: width - 50,
+         backgroundColor: theme?.SecondaryColor,
+         paddingVertical: 20,
+         color: theme?.TextColorSecondary,
+         fontSize: 17,
+      },
+      innerContainer: {
+         position: "relative",
+         overflow: "hidden",
+         display: "flex",
+         flexDirection: "row",
+         justifyContent: "space-between",
+         alignItems: "center",
+      },
+      dropdown: {
+         height: 50,
+         backgroundColor: theme?.SecondaryColor,
+         width: 170,
+         borderRadius: 20,
+         padding: 10,
+         overflow: "hidden",
+         paddingBottom: 10,
+         width: width / 2.1,
+      },
+      imageStyle: {
+         width: 24,
+         height: 24,
+         display: "none",
+      },
+      placeholderStyle: {
+         fontSize: 16,
+      },
+      selectedTextStyle: {
+         fontSize: 16,
+         marginLeft: 8,
+         color: theme?.TextColorSecondary,
+         borderRadius: 20,
+         backgroundColor: theme?.SecondaryColor,
+         textAlign: "center",
+         marginRight: 25,
+         alignContent: "center",
+      },
+      iconStyle: {
+         width: 20,
+         height: 20,
+      },
+      inputSearchStyle: {
+         height: 40,
+         fontSize: 16,
+      },
+      submitContainer: {
+         backgroundColor: theme?.PrimaryColor,
+         alignSelf: "center",
+         marginBottom: 20,
+         paddingVertical: 5,
+         paddingHorizontal: 15,
+         borderRadius: 20,
+      },
+   });
+
    return (
       <View style={styles.container}>
          <TextInput
             style={styles.input}
             placeholder="Type task here..."
+            value={taskTitle}
             onSubmitEditing={Keyboard.dismiss}
             autoFocus={true}
-            //   onLayout={() => inputRef.current.focus()}
-            //   onKeyPress={() => {console.log("first")}}
+            onChangeText={(text) => setTaskTitle(text)}
          />
          <View style={styles.innerContainer}>
-            <SelectCountry
+            <SelectDropdown
                style={styles.dropdown}
                selectedTextStyle={styles.selectedTextStyle}
                placeholderStyle={styles.placeholderStyle}
@@ -59,97 +156,45 @@ const BottomSheetInnerContainer = () => {
                iconStyle={styles.iconStyle}
                maxHeight={200}
                minHeight={220}
-               value={country}
-               data={local_data}
+               value={taskValue}
+               data={task_Type}
                valueField="value"
                labelField="lable"
-               // imageField="image"
-               placeholder="Select country"
-               searchPlaceholder="Search..."
                onChange={(e) => {
-                  setCountry(e.value);
+                  setTaskCategory(e.lable);
+                  setTaskValue(e.value);
                }}
                onFocus={() => Keyboard.dismiss()}
-               activeColor={"#9BE8D8"}
+               activeColor={theme?.PrimaryColor}
                autoScrollToDefaultValue={true}
                dropdownPosition="top"
                containerStyle={{
                   borderRadius: 20,
                   overflow: "hidden",
                   marginBottom: -10,
-                  //    alignSelf: "center",
                }}
                showsVerticalScrollIndicator={false}
             />
-            {/* <Text>Hello</Text> */}
-            <DateTime />
+            <DateTime
+               setTaskDate={setTaskDate}
+               iconColor={theme?.TextColorSecondary}
+               containerColor={theme?.SecondaryColor}
+            />
          </View>
+         <TouchableOpacity
+            onPress={() => {
+               submitTask();
+            }}
+            style={styles.submitContainer}
+         >
+            <Icon
+               name="checkmark-done-circle-sharp"
+               size={35}
+               color={theme?.IconColor}
+            />
+         </TouchableOpacity>
       </View>
    );
 };
-const {width} = Dimensions.get("window");
-const styles = StyleSheet.create({
-   container: {
-      marginTop: 20,
-   },
-   input: {
-      padding: 10,
-      borderWidth: 0.5,
-      borderRadius: 10,
-      // marginBottom: 50,
-      width: width - 50,
-      backgroundColor: "#ECDBBA",
-      paddingVertical: 20,
-      color: "#160040",
-      fontSize: 17,
-      //  fontWeight: "bold",
-   },
-   innerContainer: {
-      marginVertical: 15,
-      position: "relative",
-      overflow: "hidden",
-      display: "flex",
-      flexDirection: "row",   
-      justifyContent: "space-between",
-      alignItems: "center",
-   },
-   dropdown: {
-      //   margin: 16,
-      height: 50,
-      //  borderBottomColor: "gray",
-      //  borderBottomWidth: 0.5,
-      backgroundColor: "white",
-      width: 160,
-      // alignSelf:"center",
-      borderRadius: 20,
-      padding: 10,
-      overflow: "hidden",
-      paddingBottom: 10,
-   },
-   imageStyle: {
-      width: 24,
-      height: 24,
-      //  display: "none",
-   },
-   placeholderStyle: {
-      fontSize: 16,
-      color: "red",
-   },
-   selectedTextStyle: {
-      fontSize: 16,
-      marginLeft: 8,
-      color: "#160040",
-      //  backgroundColor:"red"
-      borderRadius: 20,
-   },
-   iconStyle: {
-      width: 20,
-      height: 20,
-   },
-   inputSearchStyle: {
-      height: 40,
-      fontSize: 16,
-   },
-});
 
 export default BottomSheetInnerContainer;

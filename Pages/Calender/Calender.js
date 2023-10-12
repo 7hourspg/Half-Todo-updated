@@ -1,31 +1,28 @@
-import {View, Text, StyleSheet, Dimensions} from "react-native";
-import React, {useState, useEffect} from "react";
-import {
-   Calendar,
-   CalendarList,
-   Agenda,
-   WeekCalendar,
-   AgendaList,
-} from "react-native-calendars";
-// import AddTask from "../Components/AddTask/AddTask";
+import {StyleSheet, ScrollView} from "react-native";
+import React, {useState, useEffect, useRef} from "react";
+import {Calendar} from "react-native-calendars";
 
-// Require cycle: Pages\Calender.js -> Components\AddTask\AddTask.js -> Pages\Calender.js Error because of this line 😒
+import OnProgress from "../../Components/OnProgress";
 
-const Calender = () => {
-   const [selectedDay, setSelectedDay] = useState();
+const Calender = ({navigation}) => {
+   const [selectedDay, setSelectedDay] = useState(null);
    const date = new Date();
 
    let day = date.getDate();
    let month = date.getMonth() + 1;
    let year = date.getFullYear();
-   // console.log(`${year}/${month}/${day}`)
 
-   console.log(selectedDay?.selected);
+   const scrollViewRef = useRef();
 
-   const {height, width} = Dimensions.get("screen");
+   useEffect(() => {
+      scrollViewRef.current.scrollToEnd({animated: true});
+   }, []);
 
    return (
-      <View style={{flex: 1, backgroundColor: "black"}}>
+      <ScrollView
+         style={{flex: 1, backgroundColor: "black"}}
+         ref={scrollViewRef}
+      >
          <Calendar
             style={[styles.calendar, {height: 350}]}
             onDayPress={(day) => {
@@ -36,7 +33,6 @@ const Calender = () => {
                [selectedDay?.selected]: {
                   selected: true,
                   disableTouchEvent: true,
-                  //    marked: true,
                   selectedColor: "green",
                   activeOpacity: true,
                },
@@ -77,17 +73,10 @@ const Calender = () => {
             maxDate={`${new Date().getFullYear()}-${
                new Date().getMonth() + 2
             }-${new Date().getDate()}`}
-
-            //   markingType="multi-dot"
-            //   markedDates={{
-            //      '2023-07-29': {selected: true,  selectedColor: 'green',marked: true, dotColor: 'red'},
-            //      '2023-07-29': {selected: true,  selectedColor: 'green',marked: true, dotColor: 'red'},
-            //      '2023-07-30': {selected: true,  selectedColor: 'green'}
-            //    }}
          />
-         {/* <Text style={{color: "red"}}>Hello</Text> */}
-         {/* <AddTask/> */}
-      </View>
+
+         <OnProgress navigation={navigation} />
+      </ScrollView>
    );
 };
 
@@ -95,6 +84,7 @@ export default Calender;
 
 const styles = StyleSheet.create({
    calendar: {
-      // backgroundColor: 'grey',
+      borderBottomColor: "grey",
+      borderBottomWidth: 1,
    },
 });
